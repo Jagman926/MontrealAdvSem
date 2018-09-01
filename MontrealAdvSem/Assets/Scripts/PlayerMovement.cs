@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     //Components
     Rigidbody2D rb;
     //Movement Variables
-    bool moving;
+    public bool movable;
     [Header("Movement Values")]
     public float moveSpeed = 0;
     public float jumpPower = 0;
@@ -21,12 +21,16 @@ public class PlayerMovement : MonoBehaviour {
 	void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
+        movable = true;
 	}
 
     void Update ()
     {
-        UpdateMovement();
-        UpdateJump();
+        if (movable)
+        {
+            UpdateMovement();
+            UpdateJump();
+        }
 	}
 
     void UpdateMovement()
@@ -62,8 +66,8 @@ public class PlayerMovement : MonoBehaviour {
     void CheckGrounding()
     {
         //Check overlap to see if on groundLayer
-        isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - .5f, transform.position.y - .5f),
-            new Vector2(transform.position.x + .5f, transform.position.y - .505f), groundLayers);
+        isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - .48f, transform.position.y - .5f),
+            new Vector2(transform.position.x + .48f, transform.position.y - .505f), groundLayers);
     }
 
     void OnDrawGizmos()
@@ -71,6 +75,6 @@ public class PlayerMovement : MonoBehaviour {
         //Draw overlap
         Gizmos.color = new Color(0, 1, 0, 0.5f);
         Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - .505f), 
-            new Vector2(1, 0.01f));
+            new Vector2(0.96f, 0.01f));
     }
 }
