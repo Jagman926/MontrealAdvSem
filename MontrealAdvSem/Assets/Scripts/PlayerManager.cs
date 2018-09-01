@@ -63,6 +63,8 @@ namespace Managers
             currPlayerRB.mass = 5;
             //Unfreeze rotation
             currPlayerRB.constraints = RigidbodyConstraints2D.None;
+            //Change color
+            currPlayer.GetComponent<SpriteRenderer>().color = Color.black;
         }
     }
 }
