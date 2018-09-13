@@ -29,7 +29,7 @@ namespace Managers
         private bool spawnNewPlayer;
 
         [Header("Player Container")]
-        private GameObject currPlayer;
+        public GameObject currPlayer;
         public List<GameObject> playerList;
 
         void Start()
