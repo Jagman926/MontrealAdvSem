@@ -9,11 +9,15 @@ namespace Managers
     {
         //Managers
         PlayerManager playerManager;
+        GameManager gameManager;
 
         [Header("Spawn Timer")]
         public TextMeshProUGUI spawnTimerText;
         public float spawnTimerWarning = 0;
         public Color spawnTimerWarningColor;
+
+        [Header("Objective Count")]
+        public TextMeshProUGUI objectivesCollectedText;
 
         [Header("Player Count")]
         public TextMeshProUGUI playerCountText;
@@ -21,12 +25,14 @@ namespace Managers
         private void Start()
         {
             playerManager = Managers.PlayerManager.Instance;
+            gameManager = Managers.GameManager.Instance;
         }
 
         private void Update()
         {
             UpdateSpawnTimer();
             UpdatePlayerCount();
+            UpdateObjectivesCollected();
         }
 
         void UpdateSpawnTimer()
@@ -48,6 +54,11 @@ namespace Managers
         void UpdatePlayerCount()
         {
             playerCountText.text = (playerManager.playerList.Count + "/" + playerManager.maxSpawnCount).ToString();
+        }
+
+        void UpdateObjectivesCollected()
+        {
+            objectivesCollectedText.text = (gameManager.collectedObjectives + "/" + gameManager.maxObjectives).ToString();
         }
     }
 }

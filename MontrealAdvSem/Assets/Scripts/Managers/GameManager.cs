@@ -12,6 +12,8 @@ namespace Managers
 
         [Header("Objective Settings")]
         public List<GameObject> objectiveList;
+        public int maxObjectives;
+        public int collectedObjectives;
 
         [Header("Current Scene")]
         public string currentScene;
@@ -32,14 +34,19 @@ namespace Managers
 
         private void LoadObjectivesList()
         {
+            //Add all objectives on map into list
             foreach (GameObject objectiveObject in GameObject.FindGameObjectsWithTag("Objective"))
             {
                 objectiveList.Add(objectiveObject);
             }
+            //Set max objectives
+            maxObjectives = objectiveList.Count;
         }
 
         private void CheckObjectives()
         {
+            //update objects collected
+            collectedObjectives = (maxObjectives - objectiveList.Count);
             //If no objective are left
             if (objectiveList.Count == 0)
             {
