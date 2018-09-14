@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movable: 0
   moveSpeed: 500
-  jumpPower: 5
+  jumpPower: 10
   gravityPower: 0.5
   isGrounded: 0
   groundLayers:

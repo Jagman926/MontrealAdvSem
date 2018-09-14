@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
             UpdateMovement();
             UpdateJump();
         }
+        else
+        {
+            rb.gravityScale = 2.0f;
+        }
 	}
 
     void UpdateMovement()
@@ -42,12 +46,6 @@ public class PlayerMovement : MonoBehaviour
         //Player Movement
         targetMoveSpeed = Mathf.Lerp(rb.velocity.x, Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, Time.deltaTime * 10);
         rb.velocity = new Vector2(targetMoveSpeed, rb.velocity.y);
-
-        //Player Jump
-        if (Managers.InputManager.Instance.playerJump && isGrounded)
-        {
-            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        }
     }
 
     void UpdateJump()
