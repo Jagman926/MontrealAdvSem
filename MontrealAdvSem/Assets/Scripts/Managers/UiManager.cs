@@ -53,7 +53,7 @@ namespace Managers
 
         void UpdatePlayerCount()
         {
-            playerCountText.text = (playerManager.playerList.Count + "/" + playerManager.maxSpawnCount).ToString();
+            playerCountText.text = (playerManager.BlockQueue.Count - 1).ToString();
         }
 
         void UpdateObjectivesCollected()

@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    //Components
-    Rigidbody2D rb;
-
-    //Movement Variables
-    public bool movable;
+    //Current Player
+    public GameObject currPlayer;
+    public Rigidbody2D currPlayerRB;
 
     [Header("Movement Values")]
     public float moveSpeed = 0;
@@ -22,30 +19,27 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     public LayerMask groundLayers;
 
-	void Start ()
+    void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
-        movable = true;
-	}
-
-    void Update ()
-    {
-        if (movable)
+        if(Managers.PlayerManager.Instance.currPlayer != null)
         {
+            UpdateCurrentPlayer();
             UpdateMovement();
             UpdateJump();
         }
-        else
-        {
-            rb.gravityScale = 2.0f;
-        }
-	}
+    }
+
+    void UpdateCurrentPlayer()
+    {
+        currPlayer = Managers.PlayerManager.Instance.currPlayer;
+        currPlayerRB = currPlayer.GetComponent<Rigidbody2D>();
+    }
 
     void UpdateMovement()
     {
         //Player Movement
-        targetMoveSpeed = Mathf.Lerp(rb.velocity.x, Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, Time.deltaTime * 10);
-        rb.velocity = new Vector2(targetMoveSpeed, rb.velocity.y);
+        targetMoveSpeed = Mathf.Lerp(currPlayerRB.velocity.x, Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, Time.deltaTime * 10);
+        currPlayerRB.velocity = new Vector2(targetMoveSpeed, currPlayerRB.velocity.y);
     }
 
     void UpdateJump()
@@ -56,26 +50,29 @@ public class PlayerMovement : MonoBehaviour
         //Player Jump
         if (Managers.InputManager.Instance.playerJump && isGrounded)
         {
-            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            currPlayerRB.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
         //Downward Force
         if (!isGrounded)
         {
-            rb.AddForce(Vector2.down * gravityPower, ForceMode2D.Impulse);
+            currPlayerRB.AddForce(Vector2.down * gravityPower, ForceMode2D.Impulse);
         }
     }
 
     void CheckGrounding()
     {
         //Check overlap to see if on groundLayer
-        isGrounded = Physics2D.OverlapArea(new Vector2(transform.position.x - .48f, transform.position.y - .5f),
-            new Vector2(transform.position.x + .48f, transform.position.y - .505f), groundLayers);
+        isGrounded = Physics2D.OverlapArea(new Vector2(currPlayer.transform.position.x - .48f, currPlayer.transform.position.y - .5f),
+            new Vector2(currPlayer.transform.position.x + .48f, currPlayer.transform.position.y - .505f), groundLayers);
     }
 
     void OnDrawGizmos()
     {
-        //Draw overlap
-        Gizmos.color = new Color(0, 1, 0, 0.5f);
-        Gizmos.DrawCube(new Vector2(transform.position.x, transform.position.y - .505f), new Vector2(0.96f, 0.01f));
+        if (currPlayer != null)
+        {
+            //Draw overlap
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
+            Gizmos.DrawCube(new Vector2(currPlayer.transform.position.x, currPlayer.transform.position.y - .505f), new Vector2(0.96f, 0.01f));
+        }
     }
 }

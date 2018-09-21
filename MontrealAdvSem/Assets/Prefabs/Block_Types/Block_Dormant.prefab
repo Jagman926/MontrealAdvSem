@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212464515973930860}
   - component: {fileID: 61282866711584412}
   - component: {fileID: 50597922393195882}
-  - component: {fileID: 114678658661168324}
+  - component: {fileID: 114712077494031208}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Block_Dormant
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114678658661168324
+--- !u!114 &114712077494031208
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,17 +96,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1213200840880496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1735a0684c449d49b240ffda2a76b22, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a4f4bb917d28ef4c9afa2cc811b2f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movable: 0
-  moveSpeed: 500
-  jumpPower: 10
-  gravityPower: 0.5
-  isGrounded: 0
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 256
+  isDormant: 0
+  physicsMaterial: {fileID: 6200000, guid: d0601a92bca1f3a4e8e3ccc814a02850, type: 2}
+  mass: 5
+  layerNumber: 8
+  color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!212 &212464515973930860
 SpriteRenderer:
   m_ObjectHideFlags: 1

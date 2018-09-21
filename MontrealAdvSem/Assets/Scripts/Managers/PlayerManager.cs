@@ -10,27 +10,19 @@ namespace Managers
         InputManager inputManager;
         GameManager gameManager;
 
-        [Header("Player Objects")]
-        public GameObject playerObject;
+        [Header("Block Types")]
         private GameObject playerSpawn;
-
-        [Header("Current Player Settings")]
-        private Rigidbody2D currPlayerRB;
-
-        [Header("Dormant Player Settings")]
-        public float dormantMass = 0;
-        public int dormantLayer = 0;
-        public PhysicsMaterial2D dormantMaterial;
+        public GameObject blockDormant;
 
         [Header("Player Spawn Settings")]
-        public int maxSpawnCount = 0;
         public float spawnTimer = 0;
         public float spawnTimeSeconds = 0;
         private bool spawnNewPlayer;
 
         [Header("Player Container")]
         public GameObject currPlayer;
-        public List<GameObject> playerList;
+        public List<GameObject> BlockList;
+        public Queue<GameObject> BlockQueue;
 
         void Start()
         {
@@ -39,16 +31,27 @@ namespace Managers
             gameManager = Managers.GameManager.Instance;
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
+            //Load block queue
+            LoadBlockQueue();
             //Set spawn new player to false
             spawnNewPlayer = false;
         }
 
         void Update()
         {
-            UpdateSpawn();
+            UpdateSpawnTiming();
         }
 
-        void UpdateSpawn()
+        void LoadBlockQueue()
+        {
+            BlockQueue = new Queue<GameObject>();
+            for (int i = 0; i < BlockList.Count; i++)
+            {
+                BlockQueue.Enqueue(BlockList[i]);
+            }
+        }
+
+        void UpdateSpawnTiming()
         {
             //Update spawn timer
             UpdateSpawnTimer();
@@ -80,13 +83,10 @@ namespace Managers
 
         void InstantiatePlayer()
         {
-            if (playerList.Count != maxSpawnCount)
+            if (BlockQueue.Count != 0)
             {
                 //Instatiate Player
-                currPlayer = Instantiate(playerObject, playerSpawn.transform);
-                currPlayerRB = currPlayer.GetComponent<Rigidbody2D>();
-                //Add to list
-                playerList.Add(currPlayer);
+                currPlayer = Instantiate(BlockQueue.Peek(), playerSpawn.transform);
                 //Reset spawn timer
                 spawnTimer = spawnTimeSeconds;
                 //Reset spawn bool
@@ -101,18 +101,12 @@ namespace Managers
 
         void DormantCurrPlayer()
         {
-            //Unmovable
-            currPlayer.GetComponent<PlayerMovement>().movable = false;
-            //Act as ground (For jumping on)
-            currPlayer.layer = dormantLayer;
-            //Change mass
-            currPlayerRB.mass = dormantMass;
-            //Unfreeze rotation
-            currPlayerRB.constraints = RigidbodyConstraints2D.None;
-            //Change color
-            currPlayer.GetComponent<SpriteRenderer>().color = Color.black;
-            //Change physics material
-            currPlayer.GetComponent<Collider2D>().sharedMaterial = dormantMaterial;
+            //Remove current block from queue
+            BlockQueue.Dequeue();
+            //Remove PlayerMovement Code
+            Destroy(currPlayer.GetComponent<PlayerMovement>());
+            //Set Color to "dormant"
+            currPlayer.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 }

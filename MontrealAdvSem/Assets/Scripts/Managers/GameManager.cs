@@ -7,8 +7,7 @@ namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
-        //Scenes
-        private string testScene = "Test_scene";
+        [Header("Level Settings")]
 
         [Header("Objective Settings")]
         public List<GameObject> objectiveList;
@@ -16,12 +15,12 @@ namespace Managers
         public int collectedObjectives;
 
         [Header("Current Scene")]
-        public string currentScene;
+        public Scene currentScene;
 
         private void Start()
         {
             //Set current scene
-            currentScene = testScene;
+            currentScene = SceneManager.GetActiveScene();
             //Load all objectives
             LoadObjectivesList();
         }
@@ -59,7 +58,7 @@ namespace Managers
 
         public void ResetScene()
         {
-            SceneManager.LoadScene(currentScene);
+            SceneManager.LoadScene(currentScene.name);
         }
     }
 }
