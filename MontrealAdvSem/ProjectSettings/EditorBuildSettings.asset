@@ -6,12 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test_scene.unity
-    guid: 061ced8b361cd364f94efaf0f5ad3a01
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_1.unity
-    guid: 1d9cdbedb6d202340a206c72ff50208c
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_2.unity
+    path: Assets/Scenes/Testing_BlockTypes/Level_Dormant.unity
     guid: 2e537232a0367d2489b75d7f4e1fa87c
+  - enabled: 1
+    path: Assets/Scenes/Testing_BlockTypes/Level_Floating.unity
+    guid: 85e8ebf6b87590a41b2c32af2c22f556
+  - enabled: 1
+    path: Assets/Scenes/Testing_BlockTypes/Level_Sticky.unity
+    guid: e3e4431c27a0eb847971a61cb09714bb
+  - enabled: 1
+    path: Assets/Scenes/Testing_BlockTypes/Level_Deteriorate.unity
+    guid: 600d578a284c96b4196a5e7a1e13c89b
+  - enabled: 1
+    path: Assets/Scenes/Testing_BlockTypes/Level_Ice.unity
+    guid: a6b12c377e290ac44a4158629be26267
+  - enabled: 1
+    path: Assets/Scenes/Testing_BlockTypes/Level_Swap.unity
+    guid: 4947499baf7920b4787e444b603b3e53
   m_configObjects: {}
