@@ -103,7 +103,7 @@ MonoBehaviour:
   physicsMaterial: {fileID: 6200000, guid: d0601a92bca1f3a4e8e3ccc814a02850, type: 2}
   mass: 5
   layerNumber: 8
-  color: {r: 0.8962264, g: 0.114142045, b: 0.8755547, a: 1}
+  color: {r: 1, g: 0.5820299, b: 0, a: 1}
 --- !u!212 &212778127431095592
 SpriteRenderer:
   m_ObjectHideFlags: 1

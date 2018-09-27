@@ -51,12 +51,15 @@ public class Float : MonoBehaviour {
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
 		//Freeze Block
 		FreezeBlock();
+		//Change tag
+		gameObject.tag = "Dormant";
         //Change to updated
         isDormant = true;
     }
 
 	void FreezeBlock()
 	{
+		//Freeze block position
 		gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;	
 	}
 }

@@ -53,9 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BlockTypes\Deteriorate.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Dormant.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Float.cs" />
+     <Compile Include="Assets\Scripts\BlockTypes\Ice.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Sticky.cs" />
+     <Compile Include="Assets\Scripts\BlockTypes\Swap.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
      <Compile Include="Assets\Scripts\Managers\ManagerSingleton.cs" />

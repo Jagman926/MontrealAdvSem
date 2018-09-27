@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sticky : MonoBehaviour {
+public class Ice : MonoBehaviour {
 
     public bool isDormant;
     private bool isUpdated;
@@ -16,19 +16,26 @@ public class Sticky : MonoBehaviour {
     [Header("Visual Components")]
     public Color color;
 
-    void Start()
+	[Header("Melt Variables")]
+	public int timeToMelt;
+	private float meltingTimer;
+
+	void Start()
     {
         //Set not dormant
         isDormant = false;
         //Get Rigidbody
         rb = gameObject.GetComponent<Rigidbody2D>();
-    }
+		//Set meting timer
+		meltingTimer = 0.0f;
+	}
 
     void Update()
     {
-        //Check if block has been updated to dormant
-        if (!isDormant)
+        if(!isDormant)
             CheckDormant();
+		else
+			MeltBlock();
     }
 
     void CheckDormant()
@@ -49,15 +56,27 @@ public class Sticky : MonoBehaviour {
         gameObject.GetComponent<SpriteRenderer>().color = color;
         //Change physics material
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
-        //Change tag
+		//Change tag
 		gameObject.tag = "Dormant";
         //Change to updated
         isDormant = true;
     }
-    private void OnCollisionStay2D(Collision2D col)
-    {
-        if(isDormant)
-        //Freeze block position
-            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-    }
+
+	void MeltBlock()
+	{
+		//If it's still not fully melted
+		if(transform.localScale.y > 1.0f/timeToMelt)
+		{
+			//Increment timer
+			meltingTimer += Time.deltaTime;
+			//If it's beenna second
+			if(meltingTimer > 1.0f)
+			{
+				//Shrink block
+				transform.localScale -= new Vector3(0, 1.0f/timeToMelt, 0);
+				//Reset timer
+				meltingTimer = 0.0f;
+			}
+		}
+	}
 }

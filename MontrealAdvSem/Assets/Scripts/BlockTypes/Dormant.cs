@@ -48,6 +48,8 @@ public class Dormant : MonoBehaviour {
         gameObject.GetComponent<SpriteRenderer>().color = color;
         //Change physics material
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
+        //Change tag
+		gameObject.tag = "Dormant";
         //Change to updated
         isDormant = true;
     }

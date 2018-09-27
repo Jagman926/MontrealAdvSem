@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sticky : MonoBehaviour {
+public class Deteriorate : MonoBehaviour {
 
-    public bool isDormant;
+public bool isDormant;
+
     private bool isUpdated;
 
     [Header("Physics Components")]
@@ -16,18 +17,23 @@ public class Sticky : MonoBehaviour {
     [Header("Visual Components")]
     public Color color;
 
-    void Start()
+	[Header("Deteriorate Variables")]
+	public int hitsToBreak;
+	public int currentHits;
+	public Color break1;
+	public Color break2;
+
+	void Start()
     {
         //Set not dormant
         isDormant = false;
         //Get Rigidbody
         rb = gameObject.GetComponent<Rigidbody2D>();
-    }
+	}
 
     void Update()
     {
-        //Check if block has been updated to dormant
-        if (!isDormant)
+        if(!isDormant)
             CheckDormant();
     }
 
@@ -49,15 +55,33 @@ public class Sticky : MonoBehaviour {
         gameObject.GetComponent<SpriteRenderer>().color = color;
         //Change physics material
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
-        //Change tag
+		//Change tag
 		gameObject.tag = "Dormant";
         //Change to updated
         isDormant = true;
     }
-    private void OnCollisionStay2D(Collision2D col)
+
+	    private void OnCollisionEnter2D(Collision2D col)
     {
-        if(isDormant)
-        //Freeze block position
-            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        if(isDormant && col.transform.tag == "Player")
+		{
+			//Increment hit
+			currentHits++;
+			//If hit once
+			if(currentHits == 1)
+			{
+				gameObject.GetComponent<SpriteRenderer>().color = break1;
+			}
+			//twice
+			else if(currentHits == 2)
+			{
+				gameObject.GetComponent<SpriteRenderer>().color = break2;
+			}
+			//thrice
+			else if(currentHits == 3)
+			{
+				Destroy(gameObject);
+			}
+		}
     }
 }
