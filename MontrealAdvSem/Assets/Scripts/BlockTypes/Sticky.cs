@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dormant : MonoBehaviour {
+public class Sticky : MonoBehaviour {
 
     public bool isDormant;
     private bool isUpdated;
@@ -16,17 +16,18 @@ public class Dormant : MonoBehaviour {
     [Header("Visual Components")]
     public Color color;
 
-	void Start()
+    void Start()
     {
         //Set not dormant
         isDormant = false;
         //Get Rigidbody
         rb = gameObject.GetComponent<Rigidbody2D>();
-	}
+    }
 
     void Update()
     {
-        if(!isDormant)
+        //Check if block has been updated to dormant
+        if (!isDormant)
             CheckDormant();
     }
 
@@ -50,5 +51,10 @@ public class Dormant : MonoBehaviour {
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
         //Change to updated
         isDormant = true;
+    }
+    private void OnCollisionStay2D(Collision2D col)
+    {
+        if(isDormant)
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }
