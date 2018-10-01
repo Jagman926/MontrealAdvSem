@@ -29,6 +29,11 @@ namespace Managers
         {
             //Check objectives
             CheckObjectives();
+            //Reset level when pressed
+            if(Managers.InputManager.Instance.levelReset)
+            {
+                ResetScene();
+            }
         }
 
         private void LoadObjectivesList()
