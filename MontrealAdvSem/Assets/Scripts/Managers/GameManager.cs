@@ -7,6 +7,9 @@ namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
+        //Manager
+        LevelManager levelManager;
+
         [Header("Level Settings")]
 
         [Header("Objective Settings")]
@@ -14,13 +17,14 @@ namespace Managers
         public int maxObjectives;
         public int collectedObjectives;
 
-        [Header("Current Scene")]
-        public Scene currentScene;
+        private void Awake()
+        {
+            //Manager instances
+            levelManager = Managers.LevelManager.Instance;
+        }
 
         private void Start()
         {
-            //Set current scene
-            currentScene = SceneManager.GetActiveScene();
             //Load all objectives
             LoadObjectivesList();
         }
@@ -32,7 +36,7 @@ namespace Managers
             //Reset level when pressed
             if(Managers.InputManager.Instance.levelReset)
             {
-                ResetScene();
+                levelManager.LoadCurrentLevel();
             }
         }
 
@@ -57,13 +61,8 @@ namespace Managers
                 //Display win
                 Debug.Log("YOU COLLECTED ALL OBJECTIVES");
                 //Reset Level
-                ResetScene();
+                levelManager.LoadNextLevel();
             }
-        }
-
-        public void ResetScene()
-        {
-            SceneManager.LoadScene(currentScene.name);
         }
     }
 }

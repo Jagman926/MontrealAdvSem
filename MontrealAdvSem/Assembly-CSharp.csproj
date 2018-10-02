@@ -60,7 +60,9 @@
      <Compile Include="Assets\Scripts\BlockTypes\Sticky.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Swap.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\GUIManager.cs" />
      <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Managers\ManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Managers\UiManager.cs" />

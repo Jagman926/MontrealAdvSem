@@ -8,7 +8,7 @@ namespace Managers
     {
         //Manager
         InputManager inputManager;
-        GameManager gameManager;
+        LevelManager levelManager;
 
         [Header("Block Types")]
         private GameObject playerSpawn;
@@ -28,7 +28,7 @@ namespace Managers
         {
             //Manager instance
             inputManager = Managers.InputManager.Instance;
-            gameManager = Managers.GameManager.Instance;
+            levelManager = Managers.LevelManager.Instance;
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
             //Load block queue
@@ -95,7 +95,7 @@ namespace Managers
             else
             {
                 //Reset Level
-                gameManager.ResetScene();
+                levelManager.LoadCurrentLevel();
             }
         }
 
