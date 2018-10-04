@@ -113,6 +113,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &188152502 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114340704289887492, guid: 272163eeab2aa2e4c912d00f55a8801a,
+    type: 2}
+  m_PrefabInternal: {fileID: 2006033598}
+  m_Script: {fileID: 11500000, guid: dbc524ea49e9964428eb9f6eb24142fe, type: 3}
 --- !u!1 &436889686
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +250,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &481965073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1387469393179854, guid: 240f2d665a87e6c4f8d717aebe457016,
+    type: 2}
+  m_PrefabInternal: {fileID: 694606384}
+--- !u!114 &487252821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114295369353628188, guid: 272163eeab2aa2e4c912d00f55a8801a,
+    type: 2}
+  m_PrefabInternal: {fileID: 2006033598}
+  m_Script: {fileID: 11500000, guid: 7c73320fa5994b946ade0ae832a202e6, type: 3}
 --- !u!1001 &526806041
 Prefab:
   m_ObjectHideFlags: 0
@@ -587,6 +604,26 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114099903657485646, guid: 240f2d665a87e6c4f8d717aebe457016,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 188152502}
+    - target: {fileID: 114082148800841064, guid: 240f2d665a87e6c4f8d717aebe457016,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 487252821}
+    - target: {fileID: 114402893751211056, guid: 240f2d665a87e6c4f8d717aebe457016,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402893751211056, guid: 240f2d665a87e6c4f8d717aebe457016,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114428214296636996, guid: 240f2d665a87e6c4f8d717aebe457016,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -603,16 +640,6 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114240181454604002, guid: 240f2d665a87e6c4f8d717aebe457016,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114402893751211056, guid: 240f2d665a87e6c4f8d717aebe457016,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114402893751211056, guid: 240f2d665a87e6c4f8d717aebe457016,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -819,6 +846,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763159890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114082148800841064, guid: 240f2d665a87e6c4f8d717aebe457016,
+    type: 2}
+  m_PrefabInternal: {fileID: 694606384}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1873089256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,18 +1069,16 @@ Prefab:
       propertyPath: playerCountText
       value: 
       objectReference: {fileID: 2077181272}
-    - target: {fileID: 114740011992795858, guid: 272163eeab2aa2e4c912d00f55a8801a,
+    - target: {fileID: 114077515894257302, guid: 272163eeab2aa2e4c912d00f55a8801a,
         type: 2}
-      propertyPath: BlockList.Array.data[0]
+      propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 1213200840880496, guid: 5d30592506f4e774b9f1c3b40b4af177,
+      objectReference: {fileID: 481965073}
+    - target: {fileID: 114077515894257302, guid: 272163eeab2aa2e4c912d00f55a8801a,
         type: 2}
-    - target: {fileID: 114740011992795858, guid: 272163eeab2aa2e4c912d00f55a8801a,
-        type: 2}
-      propertyPath: BlockList.Array.data[1]
+      propertyPath: returnButton
       value: 
-      objectReference: {fileID: 1213200840880496, guid: 5d30592506f4e774b9f1c3b40b4af177,
-        type: 2}
+      objectReference: {fileID: 1763159890}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 272163eeab2aa2e4c912d00f55a8801a, type: 2}
   m_IsPrefabAsset: 0

@@ -9,8 +9,11 @@ namespace Managers
     {
         //Manager
         LevelManager levelManager;
+        InputManager inputManager;
+        UiManager uiManager;
 
         [Header("Level Settings")]
+        public bool isPaused;
 
         [Header("Objective Settings")]
         public List<GameObject> objectiveList;
@@ -21,23 +24,26 @@ namespace Managers
         {
             //Manager instances
             levelManager = Managers.LevelManager.Instance;
+            inputManager = Managers.InputManager.Instance;
+            uiManager = Managers.UiManager.Instance;
         }
 
         private void Start()
         {
             //Load all objectives
             LoadObjectivesList();
+            //Set pause
+            isPaused = false;
+            //Set timescale
+            Time.timeScale = 1;
         }
 
         private void Update()
         {
+            //Check level inputs
+            CheckLevelInputs();
             //Check objectives
             CheckObjectives();
-            //Reset level when pressed
-            if(Managers.InputManager.Instance.levelReset)
-            {
-                levelManager.LoadCurrentLevel();
-            }
         }
 
         private void LoadObjectivesList()
@@ -62,6 +68,38 @@ namespace Managers
                 Debug.Log("YOU COLLECTED ALL OBJECTIVES");
                 //Reset Level
                 levelManager.LoadNextLevel();
+            }
+        }
+
+        private void CheckLevelInputs()
+        {
+            //Pause level when pressed
+            if(inputManager.levelPause)
+            {
+                PauseGame();
+            }
+            //Reset level when pressed
+            if(inputManager.levelReset)
+            {
+                levelManager.LoadCurrentLevel();
+            }
+        }
+
+        public void PauseGame()
+        {
+            //Switch for bool
+            isPaused = !isPaused;
+            if(isPaused)
+            {
+                //Pause frames
+                Time.timeScale = 0;
+                uiManager.PauseMenu();
+            }
+            else
+            {
+                //Resume frames
+                Time.timeScale = 1;
+                uiManager.ResumeGame();
             }
         }
     }

@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMenu: Menu_Start
-  optionsMenu: Menu_Option
+  optionsMenu: Menu_Options
   levelMenu: Menu_Level
 --- !u!1 &556691585
 GameObject:

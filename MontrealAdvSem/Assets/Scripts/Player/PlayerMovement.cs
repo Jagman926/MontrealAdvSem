@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(Managers.PlayerManager.Instance.currPlayer != null)
+        if(Managers.PlayerManager.Instance.currPlayer != null && Time.timeScale != 0)
         {
             UpdateCurrentPlayer();
             UpdateMovement();

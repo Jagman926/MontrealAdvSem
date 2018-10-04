@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Managers
 {
     public class GUIManager : Singleton<GUIManager>
     {
-
 		//Menus scenes
 		[Header("Menu Scenes")]
 		[SerializeField]
@@ -17,11 +15,11 @@ namespace Managers
 		private string optionsMenu;
 		[SerializeField]
 		private string levelMenu;
-		
+
 		public void PlayGame()
 		{
 			//Load next scene in build index
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);		
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+2);		
 		}
 
 		public void LoadStartMenu()
