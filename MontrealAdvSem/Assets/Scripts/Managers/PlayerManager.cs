@@ -9,6 +9,7 @@ namespace Managers
         //Manager
         InputManager inputManager;
         LevelManager levelManager;
+        UiManager uiManager;
 
         [Header("Block Types")]
         private GameObject playerSpawn;
@@ -29,6 +30,7 @@ namespace Managers
             //Manager instance
             inputManager = Managers.InputManager.Instance;
             levelManager = Managers.LevelManager.Instance;
+            uiManager = Managers.UiManager.Instance;
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
             //Load block queue
@@ -91,6 +93,10 @@ namespace Managers
                 spawnTimer = spawnTimeSeconds;
                 //Reset spawn bool
                 spawnNewPlayer = false;
+                //Set color to player color
+                currPlayer.GetComponent<SpriteRenderer>().color = Color.green;
+                //Update Block Queue UI
+                uiManager.UpdateBlockQueue();
             }
             else
             {

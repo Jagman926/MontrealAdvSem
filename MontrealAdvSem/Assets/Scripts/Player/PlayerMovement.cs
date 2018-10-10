@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Managers.PlayerManager.Instance.currPlayer != null && Time.timeScale != 0)
         {
+            //Update player movement
             UpdateCurrentPlayer();
             UpdateMovement();
             UpdateJump();

@@ -574,6 +574,17 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 240f2d665a87e6c4f8d717aebe457016, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &694606385 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114082148800841064, guid: 240f2d665a87e6c4f8d717aebe457016,
+    type: 2}
+  m_PrefabInternal: {fileID: 694606384}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &694606386 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1387469393179854, guid: 240f2d665a87e6c4f8d717aebe457016,
+    type: 2}
+  m_PrefabInternal: {fileID: 694606384}
 --- !u!114 &707828865 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114819011025293166, guid: 240f2d665a87e6c4f8d717aebe457016,
@@ -1492,6 +1503,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1153133141241864, guid: d32b2853621582a458afe18ccc2dc633,
         type: 2}
+    - target: {fileID: 114077515894257302, guid: 272163eeab2aa2e4c912d00f55a8801a,
+        type: 2}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 694606386}
+    - target: {fileID: 114077515894257302, guid: 272163eeab2aa2e4c912d00f55a8801a,
+        type: 2}
+      propertyPath: returnButton
+      value: 
+      objectReference: {fileID: 694606385}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 272163eeab2aa2e4c912d00f55a8801a, type: 2}
   m_IsPrefabAsset: 0
