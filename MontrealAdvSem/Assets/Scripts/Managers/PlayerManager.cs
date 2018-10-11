@@ -16,6 +16,7 @@ namespace Managers
         public GameObject blockDormant;
 
         [Header("Player Spawn Settings")]
+        public Color playerColor;
         public float spawnTimer = 0;
         public float spawnTimeSeconds = 0;
         private bool spawnNewPlayer;
@@ -51,15 +52,18 @@ namespace Managers
             {
                 BlockQueue.Enqueue(BlockList[i]);
             }
+            uiManager.LoadBlockQueueUI();
         }
 
         void UpdateSpawnTiming()
         {
-            //Update spawn timer
-            UpdateSpawnTimer();
-
+            if(currPlayer == null)
+            {
+            //Spawn first player
+            InstantiatePlayer();
+            }
             //Check if new player needs to spawn
-            if (inputManager.playerSpawn || spawnNewPlayer)
+            if ((inputManager.playerSpawn || spawnNewPlayer) && !currPlayer.GetComponent<ZoneCheck>().inNoDormantZone)
             {
                 //Set currPlayer properties before switch player
                 if (currPlayer != null)
@@ -69,16 +73,25 @@ namespace Managers
                 //Instatiate new player
                 InstantiatePlayer();
             }
+
+            //Update spawn timer
+            UpdateSpawnTimer();
         }
 
         void UpdateSpawnTimer()
         {
             //adjust timer
-            spawnTimer -= Time.deltaTime;
-
-            //If timer run out
-            if (spawnTimer < 0)
+            if(spawnTimer > 0.0f)
             {
+                if(!currPlayer.GetComponent<ZoneCheck>().inNoDormantZone)
+                {
+                    spawnTimer -= Time.deltaTime;
+                }
+            }
+            //If timer run out
+            else
+            {
+                spawnTimer = 0.0f;
                 spawnNewPlayer = true;
             }
         }
@@ -94,7 +107,7 @@ namespace Managers
                 //Reset spawn bool
                 spawnNewPlayer = false;
                 //Set color to player color
-                currPlayer.GetComponent<SpriteRenderer>().color = Color.green;
+                currPlayer.GetComponent<SpriteRenderer>().color = playerColor;
                 //Update Block Queue UI
                 uiManager.UpdateBlockQueue();
             }
@@ -109,8 +122,6 @@ namespace Managers
         {
             //Remove current block from queue
             BlockQueue.Dequeue();
-            //Remove PlayerMovement Code
-            Destroy(currPlayer.GetComponent<PlayerMovement>());
             //Set Color to "dormant"
             currPlayer.GetComponent<SpriteRenderer>().color = Color.white;
         }

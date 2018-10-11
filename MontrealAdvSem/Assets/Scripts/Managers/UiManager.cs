@@ -38,8 +38,6 @@ namespace Managers
             //Managers
             playerManager = Managers.PlayerManager.Instance;
             gameManager = Managers.GameManager.Instance;
-            //Load BlockQueue UI
-            LoadBlockQueueUI();
         }
         
         private void Update()
@@ -49,7 +47,7 @@ namespace Managers
             UpdateObjectivesCollected();
         }
 
-        void LoadBlockQueueUI()
+        public void LoadBlockQueueUI()
         {
             //Init list
             BlockQueueUI = new List<Image>();

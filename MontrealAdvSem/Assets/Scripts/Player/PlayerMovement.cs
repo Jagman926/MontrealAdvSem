@@ -63,17 +63,7 @@ public class PlayerMovement : MonoBehaviour
     void CheckGrounding()
     {
         //Check overlap to see if on groundLayer
-        isGrounded = Physics2D.OverlapArea(new Vector2(currPlayer.transform.position.x - .48f, currPlayer.transform.position.y - .5f),
-            new Vector2(currPlayer.transform.position.x + .48f, currPlayer.transform.position.y - .505f), groundLayers);
-    }
-
-    void OnDrawGizmos()
-    {
-        if (currPlayer != null)
-        {
-            //Draw overlap
-            Gizmos.color = new Color(0, 1, 0, 0.5f);
-            Gizmos.DrawCube(new Vector2(currPlayer.transform.position.x, currPlayer.transform.position.y - .505f), new Vector2(0.96f, 0.01f));
-        }
+        isGrounded = Physics2D.OverlapArea(new Vector2(currPlayer.transform.position.x - .45f, currPlayer.transform.position.y - .5f),
+            new Vector2(currPlayer.transform.position.x + .45f, currPlayer.transform.position.y - .505f), groundLayers);
     }
 }

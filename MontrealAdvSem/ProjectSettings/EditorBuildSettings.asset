@@ -12,21 +12,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/Menu_Options.unity
     guid: fc0b608c202f9144a886ae52e3ec5b5d
   - enabled: 1
-    path: Assets/Scenes/Testing_BlockTypes/Level_Dormant.unity
-    guid: 2e537232a0367d2489b75d7f4e1fa87c
+    path: Assets/Scenes/Levels_Tutorial/Tutorial_Dormant.unity
+    guid: 8b0522575eb13e24fb17d5bf84474f06
   - enabled: 1
-    path: Assets/Scenes/Testing_BlockTypes/Level_Floating.unity
-    guid: 85e8ebf6b87590a41b2c32af2c22f556
+    path: Assets/Scenes/Levels_Tutorial/Tutorial_Floating.unity
+    guid: c1983b0910547f24984ecd332a26cbe9
   - enabled: 1
-    path: Assets/Scenes/Testing_BlockTypes/Level_Sticky.unity
-    guid: e3e4431c27a0eb847971a61cb09714bb
+    path: Assets/Scenes/Levels_Tutorial/Tutorial_Deteriorate.unity
+    guid: 8b214e95e0eecc0428f3957836a818df
   - enabled: 1
-    path: Assets/Scenes/Testing_BlockTypes/Level_Deteriorate.unity
-    guid: 600d578a284c96b4196a5e7a1e13c89b
+    path: Assets/Scenes/Levels_Tutorial/Tutorial_Ice.unity
+    guid: 4a9c6abd1b0ce4149bf9bc47aa6851ac
   - enabled: 1
-    path: Assets/Scenes/Testing_BlockTypes/Level_Ice.unity
-    guid: a6b12c377e290ac44a4158629be26267
-  - enabled: 1
-    path: Assets/Scenes/Testing_BlockTypes/Level_Swap.unity
-    guid: 4947499baf7920b4787e444b603b3e53
+    path: Assets/Scenes/Levels_Tutorial/Tutorial_Swap.unity
+    guid: 8a87f48141fbece4a96f136b4f0e786f
   m_configObjects: {}

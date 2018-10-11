@@ -9,6 +9,7 @@ TagManager:
   - Objective
   - Dormant
   - SwapTarget
+  - NoDormantZone
   layers:
   - Default
   - TransparentFX
