@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4028879527105904}
   - component: {fileID: 212684580737612484}
   - component: {fileID: 61752380657688126}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: NoDormantZone
   m_TagString: NoDormantZone
   m_Icon: {fileID: 0}
@@ -35,8 +35,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1769079344018198}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -6.463, y: -3.009, z: -2}
-  m_LocalScale: {x: 1.977201, y: 4.8833017, z: 1}
+  m_LocalPosition: {x: -6.9559, y: -2.0402, z: 0}
+  m_LocalScale: {x: 4.111832, y: 3.8974433, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
