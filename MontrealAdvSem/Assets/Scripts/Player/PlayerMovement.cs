@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Pause Check
+    [HideInInspector]
     public bool pauseCheck;
     //Current Player
-    public GameObject currPlayer;
-    public Rigidbody2D currPlayerRB;
+    private GameObject currPlayer;
+    private Rigidbody2D currPlayerRB;
 
     [Header("Movement Values")]
     public float moveSpeed = 0;
@@ -29,19 +30,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(Managers.PlayerManager.Instance.currPlayer != null && pauseCheck)
+        if(currPlayer != null && pauseCheck)
         {
             //Update player movement
-            UpdateCurrentPlayer();
             UpdateMovement();
             UpdateJump();
         }
     }
 
-    void UpdateCurrentPlayer()
+    public void UpdateCurrentPlayer(GameObject player)
     {
-        currPlayer = Managers.PlayerManager.Instance.currPlayer;
-        currPlayerRB = currPlayer.GetComponent<Rigidbody2D>();
+        currPlayer = player;
+        currPlayerRB = player.GetComponent<Rigidbody2D>();
     }
 
     void UpdateMovement()

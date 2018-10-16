@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using TMPro;
 
 namespace Managers
 {
     public class UiManager : Singleton<UiManager>
     {
+        //Listeners
+        private UnityAction mUpdateBlockQueueListener;
+
         //Managers
         PlayerManager playerManager;
         GameManager gameManager;
-        InputManager inputManager;
 
         [Header("Spawn Timer")]
         public TextMeshProUGUI spawnTimerText;
@@ -32,6 +35,22 @@ namespace Managers
 		private GameObject pauseMenu;
 		[SerializeField]
 		private Button returnButton;
+
+        void Awake()
+        {
+            //Listeners
+		    mUpdateBlockQueueListener = new UnityAction (UpdateBlockQueue);
+        }
+
+	    void OnEnable()
+	    {
+		    EventManager.StartListening("UpdateBlockQueue", mUpdateBlockQueueListener);
+	    }
+
+	    void OnDisable()
+	    {
+		    EventManager.StopListening("UpdateBlockQueue", mUpdateBlockQueueListener);
+        }
 
         private void Start()
         {
@@ -79,17 +98,25 @@ namespace Managers
 
         public void UpdateBlockQueue()
         {
-            //Set to new size
-            BlockQueueSize = playerManager.BlockQueue.Count;
-            for (int i = 0; i < BlockQueueUI.Count; i++)
+            if(BlockQueueUI == null)
             {
-                if(i < BlockQueueSize)
+                //Load block queue
+                LoadBlockQueueUI();
+            }
+            else
+            {
+                //Set to new size
+                BlockQueueSize = playerManager.BlockQueue.Count;
+                for (int i = 0; i < BlockQueueUI.Count; i++)
                 {
-                    BlockQueueUI[i].color = playerManager.BlockQueue.ToArray()[i].GetComponent<SpriteRenderer>().color;
-                }
-                else
-                {
-                    BlockQueueUI[i].color = Color.white;
+                    if(i < BlockQueueSize)
+                    {
+                        BlockQueueUI[i].color = playerManager.BlockQueue.ToArray()[i].GetComponent<SpriteRenderer>().color;
+                    }
+                    else
+                    {
+                        BlockQueueUI[i].color = Color.white;
+                    }
                 }
             }
         }

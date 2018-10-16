@@ -8,7 +8,10 @@ namespace Managers
     {
         //Manager
         InputManager inputManager;
-        UiManager uiManager;
+
+        //Script references
+        PlayerMovement playerMovementScript;
+        ZoneCheck playerZoneCheckScript;
 
         [Header("Block Types")]
         private GameObject playerSpawn;
@@ -16,6 +19,7 @@ namespace Managers
 
         [Header("Player Spawn Settings")]
         public Color playerColor;
+        [HideInInspector]
         public float spawnTimer = 0;
         public float spawnTimeSeconds = 0;
         private bool spawnNewPlayer;
@@ -29,7 +33,8 @@ namespace Managers
         {
             //Manager instance
             inputManager = Managers.InputManager.Instance;
-            uiManager = Managers.UiManager.Instance;
+            //Script reference
+            playerMovementScript = GetComponent<PlayerMovement>();
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
             //Load block queue
@@ -50,7 +55,7 @@ namespace Managers
             {
                 BlockQueue.Enqueue(BlockList[i]);
             }
-            uiManager.LoadBlockQueueUI();
+            EventManager.TriggerEvent("UpdateBlockQueue");
         }
 
         void UpdateSpawnTiming()
@@ -61,7 +66,7 @@ namespace Managers
             InstantiatePlayer();
             }
             //Check if new player needs to spawn
-            if ((inputManager.playerSpawn || spawnNewPlayer) && !currPlayer.GetComponent<ZoneCheck>().inNoDormantZone)
+            if ((inputManager.playerSpawn || spawnNewPlayer) && !playerZoneCheckScript.inNoDormantZone)
             {
                 //Set currPlayer properties before switch player
                 if (currPlayer != null)
@@ -81,7 +86,7 @@ namespace Managers
             //adjust timer
             if(spawnTimer > 0.0f)
             {
-                if(!currPlayer.GetComponent<ZoneCheck>().inNoDormantZone)
+                if(!playerZoneCheckScript.inNoDormantZone)
                 {
                     spawnTimer -= Time.deltaTime;
                 }
@@ -100,6 +105,10 @@ namespace Managers
             {
                 //Instatiate Player
                 currPlayer = Instantiate(BlockQueue.Peek(), playerSpawn.transform);
+                //Set movement script to curr player
+                playerMovementScript.UpdateCurrentPlayer(currPlayer);
+                //Set zone check script
+                playerZoneCheckScript = currPlayer.GetComponent<ZoneCheck>();
                 //Reset spawn timer
                 spawnTimer = spawnTimeSeconds;
                 //Reset spawn bool
@@ -107,7 +116,7 @@ namespace Managers
                 //Set color to player color
                 currPlayer.GetComponent<SpriteRenderer>().color = playerColor;
                 //Update Block Queue UI
-                uiManager.UpdateBlockQueue();
+                EventManager.TriggerEvent("UpdateBlockQueue");
             }
             else
             {

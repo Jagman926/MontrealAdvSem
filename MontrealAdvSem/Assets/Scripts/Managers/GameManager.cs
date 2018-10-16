@@ -81,7 +81,8 @@ namespace Managers
             {
                 //Display win
                 Debug.Log("YOU COLLECTED ALL OBJECTIVES");
-                //Reset Level
+                //Load next Level
+                //ADD END LEVEL SCREEN HERE (maybe add event that triggers screen pop up)
                 levelManager.LoadNextLevel();
             }
             else
