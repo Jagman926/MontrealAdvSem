@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace Managers
 {
     public class LevelManager : Singleton<LevelManager>
     {
+		//Listeners
+		private UnityAction mResetLevelListener;
+
 		//Manager
 		GUIManager guiManager;
 
@@ -20,6 +24,8 @@ namespace Managers
 
 		public void Awake()
 		{
+			//Listeners
+			mResetLevelListener = new UnityAction (LoadCurrentLevel);
 			//Manager instances
 			guiManager = Managers.GUIManager.Instance;
 
@@ -27,6 +33,16 @@ namespace Managers
 			currentLevel = SceneManager.GetActiveScene().name;
 			currentLevelNumber = levelList.IndexOf(currentLevel);			
 		}
+
+	    void OnEnable()
+	    {
+		    EventManager.StartListening("ResetLevel", mResetLevelListener);
+	    }
+
+	    void OnDisable()
+	    {
+		    EventManager.StopListening("ResetLevel", mResetLevelListener);
+        }
 
 		public void SetCurrentLevel(string newLevel)
 		{

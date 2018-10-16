@@ -2197,6 +2197,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114082148800841064, guid: 240f2d665a87e6c4f8d717aebe457016,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseToggle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 240f2d665a87e6c4f8d717aebe457016, type: 2}
   m_IsPrefabAsset: 0

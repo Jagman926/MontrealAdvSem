@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //Pause Check
+    public bool pauseCheck;
     //Current Player
     public GameObject currPlayer;
     public Rigidbody2D currPlayerRB;
@@ -19,9 +21,15 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     public LayerMask groundLayers;
 
+    void Start()
+    {
+        //set pause check
+        pauseCheck = true;
+    }
+
     void Update()
     {
-        if(Managers.PlayerManager.Instance.currPlayer != null && Time.timeScale != 0)
+        if(Managers.PlayerManager.Instance.currPlayer != null && pauseCheck)
         {
             //Update player movement
             UpdateCurrentPlayer();

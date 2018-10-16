@@ -8,7 +8,6 @@ namespace Managers
     {
         //Manager
         InputManager inputManager;
-        LevelManager levelManager;
         UiManager uiManager;
 
         [Header("Block Types")]
@@ -30,7 +29,6 @@ namespace Managers
         {
             //Manager instance
             inputManager = Managers.InputManager.Instance;
-            levelManager = Managers.LevelManager.Instance;
             uiManager = Managers.UiManager.Instance;
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
@@ -114,7 +112,7 @@ namespace Managers
             else
             {
                 //Reset Level
-                levelManager.LoadCurrentLevel();
+                EventManager.TriggerEvent("ResetLevel");
             }
         }
 

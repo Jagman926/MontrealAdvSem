@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
+        //Listeners
+        private UnityAction mPauseGameListener;
+
         //Manager
         LevelManager levelManager;
-        InputManager inputManager;
         UiManager uiManager;
 
         [Header("Level Settings")]
@@ -21,12 +24,23 @@ namespace Managers
         public int maxObjectives;
         public int collectedObjectives;
 
-        private void Awake()
-        {
+	    void Awake()
+	    {
+            //Listeners
+		    mPauseGameListener = new UnityAction (PauseToggle);
             //Manager instances
             levelManager = Managers.LevelManager.Instance;
-            inputManager = Managers.InputManager.Instance;
             uiManager = Managers.UiManager.Instance;
+	    }
+
+	    void OnEnable()
+	    {
+		    EventManager.StartListening("PauseGame", mPauseGameListener);
+	    }
+
+	    void OnDisable()
+	    {
+		    EventManager.StopListening("PauseGame", mPauseGameListener);
         }
 
         private void Start()
@@ -43,8 +57,6 @@ namespace Managers
 
         private void Update()
         {
-            //Check level inputs
-            CheckLevelInputs();
             //Check objectives
             CheckObjectives();
         }
@@ -79,21 +91,7 @@ namespace Managers
             }
         }
 
-        private void CheckLevelInputs()
-        {
-            //Pause level when pressed
-            if(inputManager.levelPause)
-            {
-                PauseGame();
-            }
-            //Reset level when pressed
-            if(inputManager.levelReset)
-            {
-                levelManager.LoadCurrentLevel();
-            }
-        }
-
-        public void PauseGame()
+        public void PauseToggle()
         {
             //Switch for bool
             isPaused = !isPaused;
@@ -101,7 +99,7 @@ namespace Managers
             {
                 //Pause frames
                 Time.timeScale = 0;
-                uiManager.PauseMenu();
+                uiManager.PauseGame();
             }
             else
             {

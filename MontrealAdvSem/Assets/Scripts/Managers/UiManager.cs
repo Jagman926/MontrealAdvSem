@@ -104,15 +104,15 @@ namespace Managers
             objectivesCollectedText.text = (gameManager.collectedObjectives + "/" + gameManager.maxObjectives).ToString();
         }
 
-		public void PauseMenu()
+		public void PauseGame()
 		{
 			//Activate menu
 			pauseMenu.SetActive(true);
-			StartCoroutine (Pause());
+			StartCoroutine (PauseBuffer());
 			//Set return as selected button
 			returnButton.Select();
 			//Set pause check to false
-			Managers.InputManager.Instance.pauseCheck = false;
+			playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
 		}
 
 		public void ResumeGame()
@@ -121,15 +121,15 @@ namespace Managers
 			EventSystem.current.SetSelectedGameObject(null);
 			//Deactivate menu
 			pauseMenu.SetActive(false);
-			StartCoroutine (Pause());
+			StartCoroutine (PauseBuffer());
 		}
 
-		IEnumerator Pause()
+		IEnumerator PauseBuffer()
     	{
 		//Wait
         yield return new WaitForSeconds(0.1f);
 		//Set pause check to true
-		Managers.InputManager.Instance.pauseCheck = true;
+			playerManager.GetComponent<PlayerMovement>().pauseCheck = true;
      	}
     }
 }

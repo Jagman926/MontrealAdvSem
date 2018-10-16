@@ -6,7 +6,6 @@ namespace Managers
 {
     public class InputManager : Singleton<InputManager>
     {
-        public bool pauseCheck;
         [Header("Player Control Booleans")]
         public bool playerJump;
         public bool playerSpawn;
@@ -14,24 +13,14 @@ namespace Managers
         public bool levelReset;
         public bool levelPause;
 
-        private void Start()
-        {
-            //set pause check
-            pauseCheck = true;
-        }
-
         private void Update()
         {
             //Check Pause
             levelPause = Input.GetButtonDown("Pause");
-            //While paused, don't get game input
-            if(pauseCheck)
-            {
-                playerJump = Input.GetButtonDown("Jump");
-                playerSpawn = Input.GetButtonDown("Spawn");
-                playerAction = Input.GetButtonDown("Action");
-                levelReset = Input.GetButtonDown("Reset");
-            }
+            playerJump = Input.GetButtonDown("Jump");
+            playerSpawn = Input.GetButtonDown("Spawn");
+            playerAction = Input.GetButtonDown("Action");
+            levelReset = Input.GetButtonDown("Reset");
         }
     }
 }

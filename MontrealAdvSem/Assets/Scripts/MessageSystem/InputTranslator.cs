@@ -11,9 +11,13 @@ public class InputTranslator : MonoBehaviour
 
 	private void CheckInputs()
 	{
-		if(Input.GetKeyDown("q"))
+		if(Input.GetButtonDown("Pause"))
 		{
-			EventManager.TriggerEvent("test");
+			EventManager.TriggerEvent("PauseGame");
+		}
+		if(Input.GetButtonDown("Reset"))
+		{
+			EventManager.TriggerEvent("ResetLevel");
 		}
 	}
 }
