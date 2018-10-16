@@ -28,9 +28,9 @@ namespace Managers
             if(pauseCheck)
             {
                 playerJump = Input.GetButtonDown("Jump");
-                playerSpawn = Input.GetButtonDown("Fire1");
-                playerAction = Input.GetButtonDown("Fire2");
-                levelReset = Input.GetButtonDown("Fire3");
+                playerSpawn = Input.GetButtonDown("Spawn");
+                playerAction = Input.GetButtonDown("Action");
+                levelReset = Input.GetButtonDown("Reset");
             }
         }
     }

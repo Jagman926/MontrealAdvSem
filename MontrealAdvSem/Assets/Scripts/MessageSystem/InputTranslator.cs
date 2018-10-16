@@ -6,9 +6,14 @@ public class InputTranslator : MonoBehaviour
 {
 	void Update () 
 	{
+		CheckInputs();
+	}
+
+	private void CheckInputs()
+	{
 		if(Input.GetKeyDown("q"))
 		{
 			EventManager.TriggerEvent("test");
-		}	
+		}
 	}
 }
