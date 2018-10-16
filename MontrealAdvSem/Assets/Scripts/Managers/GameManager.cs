@@ -14,6 +14,7 @@ namespace Managers
 
         [Header("Level Settings")]
         public bool isPaused;
+        public float levelTimer;
 
         [Header("Objective Settings")]
         public List<GameObject> objectiveList;
@@ -36,6 +37,8 @@ namespace Managers
             isPaused = false;
             //Set timescale
             Time.timeScale = 1;
+            //Set levelTimer
+            levelTimer = 0.0f;
         }
 
         private void Update()
@@ -68,6 +71,11 @@ namespace Managers
                 Debug.Log("YOU COLLECTED ALL OBJECTIVES");
                 //Reset Level
                 levelManager.LoadNextLevel();
+            }
+            else
+            {
+                //Update level timer
+                levelTimer += Time.deltaTime;
             }
         }
 
