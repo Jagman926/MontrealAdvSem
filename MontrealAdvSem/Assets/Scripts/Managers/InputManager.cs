@@ -29,7 +29,7 @@ namespace Managers
             {
                 //Pause Level
                 EventParam eventParam = new EventParam();
-                Managers.EventManager.TriggerEvent("PauseGame", eventParam);
+                Managers.EventManager.TriggerEvent("PauseToggle", eventParam);
             }
             if (levelReset)
             {

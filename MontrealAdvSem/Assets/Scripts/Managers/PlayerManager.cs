@@ -8,6 +8,7 @@ namespace Managers
     {
         //Manager
         InputManager inputManager;
+        ScenesManager scenesManager;
         BlockType blockType;
 
         //Script references
@@ -26,19 +27,21 @@ namespace Managers
 
         [Header("Player Container")]
         public GameObject currPlayer;
-        public List<BlockType.BlockTypes> BlockList;
+        private List<BlockType.BlockTypes> BlockList;
         public Queue<GameObject> BlockQueue;
 
         void Start()
         {
             //Manager instance
             inputManager = Managers.InputManager.Instance;
+            scenesManager = Managers.ScenesManager.Instance;
             //Script reference
             playerMovementScript = GetComponent<PlayerMovement>();
             blockType = GetComponent<BlockType>();
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
             //Load block queue
+            BlockList = scenesManager.currentLevel.levelBlockOrder;
             LoadBlockQueue();
             //Set spawn new player to false
             spawnNewPlayer = false;
@@ -57,6 +60,8 @@ namespace Managers
                 BlockQueue.Enqueue(blockType.ReturnBlockType(BlockList[i]));
             }
             //Update Block Queue
+            EventParam eventParam = new EventParam();
+            Managers.EventManager.TriggerEvent("UpdateBlockQueue", eventParam);
         }
 
         void UpdateSpawnTiming()
@@ -117,6 +122,8 @@ namespace Managers
                 //Set color to player color
                 currPlayer.GetComponent<SpriteRenderer>().color = playerColor;
                 //Update Block Queue UI
+                EventParam eventParam = new EventParam();
+                Managers.EventManager.TriggerEvent("UpdateBlockQueue", eventParam);
             }
             else
             {

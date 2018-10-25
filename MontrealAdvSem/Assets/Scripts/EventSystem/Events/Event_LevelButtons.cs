@@ -7,6 +7,7 @@ public class Event_LevelButtons : MonoBehaviour
 {
     //Manager Instance
     Managers.ScenesManager scenesManager;
+    Managers.GameManager gameManager;
 
     //Actions
     private Action<EventParam> aLoadLevel;
@@ -26,6 +27,7 @@ public class Event_LevelButtons : MonoBehaviour
     private void Start()
     {
         scenesManager = Managers.ScenesManager.Instance;
+        gameManager = Managers.GameManager.Instance;
     }
 
     void OnEnable()

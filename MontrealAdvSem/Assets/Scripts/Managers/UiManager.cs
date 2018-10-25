@@ -15,7 +15,7 @@ namespace Managers
 
         //Managers
         PlayerManager playerManager;
-        GameManager gameManager;
+        LevelManager levelManager;
 
         [Header("Spawn Timer")]
         public TextMeshProUGUI spawnTimerText;
@@ -36,11 +36,12 @@ namespace Managers
 		[SerializeField]
 		private Button returnButton;
 
+
         private void Start()
         {
-            //Managers
+            //Manager
+            levelManager = Managers.LevelManager.Instance;
             playerManager = Managers.PlayerManager.Instance;
-            gameManager = Managers.GameManager.Instance;
         }
         
         private void Update()
@@ -112,7 +113,7 @@ namespace Managers
 
         void UpdateObjectivesCollected()
         {
-            objectivesCollectedText.text = (gameManager.collectedObjectives + "/" + gameManager.maxObjectives).ToString();
+            objectivesCollectedText.text = (levelManager.collectedObjectives + "/" + levelManager.maxObjectives).ToString();
         }
 
 		public void PauseGame()

@@ -14,12 +14,10 @@ namespace Managers
 
 		[Header("Level Data")]
 		public LEVEL_MASTER levelMaster;
+		public bool inLevel;
 		[SerializeField]
-		private string currentLevel;
-		[SerializeField]
-		private string nextLevel;
-		[SerializeField]
-		private string lastLevel;
+		private int currentLevelIndex;
+		public Level_Data currentLevel;
 
 		[Header("Menu Scenes")]
 		[SerializeField]
@@ -31,6 +29,8 @@ namespace Managers
 
 		private void Start()
 		{
+			//Load level master information
+			LoadLevelMasterInformation();
 			//Load menu Scene
 			LoadNewScene(startScene);
 		}
@@ -38,6 +38,20 @@ namespace Managers
 		private void Update()
 		{
 		
+		}
+
+		private void LoadLevelMasterInformation()
+		{
+			//If no previous current level, then set current level to first level
+			if(levelMaster.currentLevel == null)
+			{
+				currentLevel = levelMaster.level_Datas[0];
+			}
+			//Load previous current level
+			else
+			{
+			currentLevelIndex = levelMaster.level_Datas.IndexOf(levelMaster.currentLevel);
+			}
 		}
 
 		public void LoadNewScene(string sceneName)
@@ -67,18 +81,24 @@ namespace Managers
 		{
 			//Load scene
 			LoadNewScene(startScene);
+			//Set inLevel
+			inLevel = false;
 		}
 
 		public void LoadOptionsMenu()
 		{
 			//Load scene
 			LoadNewScene(optionsScene);
+			//Set inLevel
+			inLevel = false;
 		}
 
 		public void LoadLevelMenu()
 		{
 			//Load scene
 			LoadNewScene(levelScene);
+			//Set inLevel
+			inLevel = false;
 		}
 
 		public void ExitGame()
@@ -91,27 +111,63 @@ namespace Managers
 ////////////////////////////////       LEVEL LOADING          ////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+		private void IncrementLevel()
+		{
+			if(currentLevelIndex + 1 < levelMaster.level_Datas.Count)
+			{
+				currentLevelIndex++;
+				currentLevel = levelMaster.level_Datas[currentLevelIndex];
+			}
+			else
+			{
+				Debug.Log("Level Out of Bounds (Too High)");
+			}
+		}
+
+		private void DecrementLevel()
+		{
+			if(currentLevelIndex - 1 >= 0)
+			{
+				currentLevelIndex--;
+				currentLevel = levelMaster.level_Datas[currentLevelIndex];
+			}
+			else
+			{
+				Debug.Log("Level Out of Bounds (Too Low)");
+			}
+		}
+
 		public void LoadLevel(string levelName)
 		{
 			LoadNewScene(levelName);
+			//Set inLevel
+			inLevel = true;
 		}
 
 		public void LoadCurrentLevel()
 		{
 			//Load Scene
-			LoadNewScene(currentLevel);
+			LoadNewScene(currentLevel.name);
+			//Set inLevel
+			inLevel = true;
 		}
 
 		public void LoadNextLevel()
 		{
+			IncrementLevel();
 			//Load scene
-			LoadNewScene(nextLevel);
+			LoadNewScene(currentLevel.name);
+			//Set inLevel
+			inLevel = true;
 		}
 
 		public void LoadLastLevel()
 		{
+			DecrementLevel();
 			//Load scene
-			LoadNewScene(lastLevel);
+			LoadNewScene(currentLevel.name);
+			//Set inLevel
+			inLevel = true;
 		}
 	}
 }

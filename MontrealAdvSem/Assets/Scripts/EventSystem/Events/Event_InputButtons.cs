@@ -6,40 +6,40 @@ using UnityEngine;
 public class Event_InputButtons : MonoBehaviour 
 {
 	//Manager Instance
-	Managers.GameManager gameManager;
+	Managers.LevelManager levelManager;
 	Managers.ScenesManager scenesManager;
 
 	//Actions
-	private Action<EventParam> aPauseGame;
+	private Action<EventParam> aPauseToggle;
     private Action<EventParam> aResetLevel;
 
     void Awake()
     {
-		aPauseGame = new Action<EventParam>(PauseGame);
+		aPauseToggle = new Action<EventParam>(PauseToggle);
 		aResetLevel = new Action<EventParam>(ResetLevel);
 	}
 
 	private void Start ()
 	{
-		gameManager = Managers.GameManager.Instance;
+		levelManager = Managers.LevelManager.Instance;
 		scenesManager = Managers.ScenesManager.Instance;
 	}
 
 	void OnEnable()
 	{
-		Managers.EventManager.StartListening("PauseGame", aPauseGame);
+		Managers.EventManager.StartListening("PauseToggle", aPauseToggle);
 		Managers.EventManager.StartListening("ResetLevel", aResetLevel);
 	}
 
 	void OnDisable()
 	{
-		Managers.EventManager.StopListening("PauseGame", aPauseGame);
+		Managers.EventManager.StopListening("PauseGame", aPauseToggle);
 		Managers.EventManager.StopListening("ResetLevel", aResetLevel);
 	}
 
-	void PauseGame(EventParam eventParam)
+	void PauseToggle(EventParam eventParam)
 	{
-		gameManager.PauseToggle();
+		levelManager.PauseToggle();
 	}
 
 	void ResetLevel(EventParam eventParam)

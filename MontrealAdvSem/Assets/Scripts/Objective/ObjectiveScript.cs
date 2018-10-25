@@ -10,7 +10,7 @@ public class ObjectiveScript : MonoBehaviour
         if (col.gameObject == Managers.PlayerManager.Instance.currPlayer)
         {
             //Remove Object from list
-            Managers.GameManager.Instance.objectiveList.Remove(gameObject);
+            Managers.LevelManager.Instance.objectiveList.Remove(gameObject);
             //Destroy this object
             Destroy(gameObject);
         }
