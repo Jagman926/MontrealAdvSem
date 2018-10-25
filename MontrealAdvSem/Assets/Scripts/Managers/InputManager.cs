@@ -15,12 +15,28 @@ namespace Managers
 
         private void Update()
         {
-            //Check Pause
             levelPause = Input.GetButtonDown("Pause");
             playerJump = Input.GetButtonDown("Jump");
             playerSpawn = Input.GetButtonDown("Spawn");
             playerAction = Input.GetButtonDown("Action");
             levelReset = Input.GetButtonDown("Reset");
+            InputEvents();
+        }
+
+        void InputEvents()
+        {
+            if (levelPause)
+            {
+                //Pause Level
+                EventParam eventParam = new EventParam();
+                Managers.EventManager.TriggerEvent("PauseGame", eventParam);
+            }
+            if (levelReset)
+            {
+                //Reset Level
+                EventParam eventParam = new EventParam();
+                Managers.EventManager.TriggerEvent("ResetLevel", eventParam);
+            }
         }
     }
 }

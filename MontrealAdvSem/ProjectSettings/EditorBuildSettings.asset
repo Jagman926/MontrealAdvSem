@@ -12,18 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/Menu_Options.unity
     guid: fc0b608c202f9144a886ae52e3ec5b5d
   - enabled: 1
-    path: Assets/Scenes/Levels_Tutorial/Tutorial_Dormant.unity
-    guid: 8b0522575eb13e24fb17d5bf84474f06
+    path: Assets/Scenes/Menus/Menu_Level.unity
+    guid: 25bf36383b09aae4097643889dcf5fea
   - enabled: 1
-    path: Assets/Scenes/Levels_Tutorial/Tutorial_Floating.unity
-    guid: c1983b0910547f24984ecd332a26cbe9
-  - enabled: 1
-    path: Assets/Scenes/Levels_Tutorial/Tutorial_Deteriorate.unity
-    guid: 8b214e95e0eecc0428f3957836a818df
-  - enabled: 1
-    path: Assets/Scenes/Levels_Tutorial/Tutorial_Ice.unity
-    guid: 4a9c6abd1b0ce4149bf9bc47aa6851ac
-  - enabled: 1
-    path: Assets/Scenes/Levels_Tutorial/Tutorial_Swap.unity
-    guid: 8a87f48141fbece4a96f136b4f0e786f
+    path: Assets/Scenes/Levels/Level_0.unity
+    guid: bf498fb8ee4c5ca4497e77a3367f44c8
   m_configObjects: {}

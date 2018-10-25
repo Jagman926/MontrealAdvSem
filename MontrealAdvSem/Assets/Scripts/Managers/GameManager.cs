@@ -8,12 +8,10 @@ namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
-        //Listeners
-        private UnityAction mPauseGameListener;
 
         //Manager
-        LevelManager levelManager;
         UiManager uiManager;
+        ScenesManager scenesManager;
 
         [Header("Level Settings")]
         public bool isPaused;
@@ -26,22 +24,10 @@ namespace Managers
 
 	    void Awake()
 	    {
-            //Listeners
-		    mPauseGameListener = new UnityAction (PauseToggle);
             //Manager instances
-            levelManager = Managers.LevelManager.Instance;
             uiManager = Managers.UiManager.Instance;
+            scenesManager = Managers.ScenesManager.Instance;
 	    }
-
-	    void OnEnable()
-	    {
-		    EventManager.StartListening("PauseGame", mPauseGameListener);
-	    }
-
-	    void OnDisable()
-	    {
-		    EventManager.StopListening("PauseGame", mPauseGameListener);
-        }
 
         private void Start()
         {
@@ -83,7 +69,6 @@ namespace Managers
                 Debug.Log("YOU COLLECTED ALL OBJECTIVES");
                 //Load next Level
                 //ADD END LEVEL SCREEN HERE (maybe add event that triggers screen pop up)
-                levelManager.LoadNextLevel();
             }
             else
             {

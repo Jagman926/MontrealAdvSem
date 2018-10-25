@@ -8,6 +8,7 @@ namespace Managers
     {
         //Manager
         InputManager inputManager;
+        BlockType blockType;
 
         //Script references
         PlayerMovement playerMovementScript;
@@ -15,7 +16,6 @@ namespace Managers
 
         [Header("Block Types")]
         private GameObject playerSpawn;
-        public GameObject blockDormant;
 
         [Header("Player Spawn Settings")]
         public Color playerColor;
@@ -26,7 +26,7 @@ namespace Managers
 
         [Header("Player Container")]
         public GameObject currPlayer;
-        public List<GameObject> BlockList;
+        public List<BlockType.BlockTypes> BlockList;
         public Queue<GameObject> BlockQueue;
 
         void Start()
@@ -35,6 +35,7 @@ namespace Managers
             inputManager = Managers.InputManager.Instance;
             //Script reference
             playerMovementScript = GetComponent<PlayerMovement>();
+            blockType = GetComponent<BlockType>();
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
             //Load block queue
@@ -53,9 +54,9 @@ namespace Managers
             BlockQueue = new Queue<GameObject>();
             for (int i = 0; i < BlockList.Count; i++)
             {
-                BlockQueue.Enqueue(BlockList[i]);
+                BlockQueue.Enqueue(blockType.ReturnBlockType(BlockList[i]));
             }
-            EventManager.TriggerEvent("UpdateBlockQueue");
+            //Update Block Queue
         }
 
         void UpdateSpawnTiming()
@@ -116,12 +117,12 @@ namespace Managers
                 //Set color to player color
                 currPlayer.GetComponent<SpriteRenderer>().color = playerColor;
                 //Update Block Queue UI
-                EventManager.TriggerEvent("UpdateBlockQueue");
             }
             else
             {
                 //Reset Level
-                EventManager.TriggerEvent("ResetLevel");
+                EventParam eventParam = new EventParam();
+                Managers.EventManager.TriggerEvent("ResetLevel", eventParam);
             }
         }
 

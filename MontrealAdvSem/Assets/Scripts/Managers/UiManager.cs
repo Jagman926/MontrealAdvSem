@@ -36,22 +36,6 @@ namespace Managers
 		[SerializeField]
 		private Button returnButton;
 
-        void Awake()
-        {
-            //Listeners
-		    mUpdateBlockQueueListener = new UnityAction (UpdateBlockQueue);
-        }
-
-	    void OnEnable()
-	    {
-		    EventManager.StartListening("UpdateBlockQueue", mUpdateBlockQueueListener);
-	    }
-
-	    void OnDisable()
-	    {
-		    EventManager.StopListening("UpdateBlockQueue", mUpdateBlockQueueListener);
-        }
-
         private void Start()
         {
             //Managers
@@ -153,10 +137,10 @@ namespace Managers
 
 		IEnumerator PauseBuffer()
     	{
-		//Wait
-        yield return new WaitForSeconds(0.1f);
-		//Set pause check to true
-			playerManager.GetComponent<PlayerMovement>().pauseCheck = true;
+		    //Wait
+            yield return new WaitForSeconds(0.1f);
+		    //Set pause check to true
+		    playerManager.GetComponent<PlayerMovement>().pauseCheck = true;
      	}
     }
 }

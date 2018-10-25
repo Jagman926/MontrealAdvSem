@@ -53,22 +53,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BlockTypes\BlockType.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Deteriorate.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Dormant.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Float.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Ice.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Sticky.cs" />
      <Compile Include="Assets\Scripts\BlockTypes\Swap.cs" />
+     <Compile Include="Assets\Scripts\EventSystem\Events\Event_InputButtons.cs" />
+     <Compile Include="Assets\Scripts\EventSystem\Events\Event_LevelButtons.cs" />
+     <Compile Include="Assets\Scripts\EventSystem\Events\Event_SceneButtons.cs" />
+     <Compile Include="Assets\Scripts\EventSystem\Events\Event_UIUpdate.cs" />
+     <Compile Include="Assets\Scripts\EventSystem\Trigger\Trigger_LevelButtons.cs" />
+     <Compile Include="Assets\Scripts\EventSystem\Trigger\Trigger_SceneButtons.cs" />
+     <Compile Include="Assets\Scripts\Levels\Level_Data.cs" />
+     <Compile Include="Assets\Scripts\Levels\LEVEL_MASTER.cs" />
+     <Compile Include="Assets\Scripts\Managers\EventManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
-     <Compile Include="Assets\Scripts\Managers\GUIManager.cs" />
      <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
-     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\Managers\ManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\ScenesManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\Singleton\ManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\Managers\UiManager.cs" />
-     <Compile Include="Assets\Scripts\MessageSystem\EventManager.cs" />
-     <Compile Include="Assets\Scripts\MessageSystem\Events\_TestEvent.cs" />
-     <Compile Include="Assets\Scripts\MessageSystem\InputTranslator.cs" />
      <Compile Include="Assets\Scripts\Objective\ObjectiveScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\ZoneCheck.cs" />
