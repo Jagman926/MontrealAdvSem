@@ -6,6 +6,7 @@ using UnityEngine;
 public class Event_InputButtons : MonoBehaviour 
 {
 	//Manager Instance
+	Managers.GameManager gameManager;
 	Managers.LevelManager levelManager;
 	Managers.ScenesManager scenesManager;
 
@@ -21,6 +22,7 @@ public class Event_InputButtons : MonoBehaviour
 
 	private void Start ()
 	{
+		gameManager = Managers.GameManager.Instance;
 		levelManager = Managers.LevelManager.Instance;
 		scenesManager = Managers.ScenesManager.Instance;
 	}
@@ -44,6 +46,8 @@ public class Event_InputButtons : MonoBehaviour
 
 	void ResetLevel(EventParam eventParam)
 	{
+		//Increment level retries count
+		gameManager.levelRetries++;
 		scenesManager.LoadCurrentLevel();
 	}
 }

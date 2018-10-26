@@ -6,6 +6,9 @@ namespace Managers
 {
     public class LevelManager : Singleton<LevelManager>
     {
+        //Manager Instance
+        GameManager gameManager;
+
         [Header("Level Settings")]
         public float levelTimer;
         public bool isPaused;
@@ -15,21 +18,36 @@ namespace Managers
         public int maxObjectives;
         public int collectedObjectives;
 
+		[Header("Particles")]
+		[SerializeField]
+		private ParticleSystem endLevelParticles1;
+		[SerializeField]
+		private ParticleSystem endLevelParticles2;
+		[SerializeField]
+		private ParticleSystem endLevelParticles3;
+
+
+
         private void Start()
         {
+            //Manager Instance
+            gameManager = Managers.GameManager.Instance;
             //Set pause
             isPaused = false;
-            //Set timescale
-            Time.timeScale = 1;
             //Set levelTimer
             levelTimer = 0.0f;
             //Load Objective List
             LoadObjectivesList();
+            //Start new level GameManager
+            gameManager.StartNewLevel();
         }
 
         private void Update()
         {
-            CheckObjectives();
+            if (!isPaused)
+            {
+                CheckObjectives();
+            }
         }
 
         public void PauseToggle()
@@ -39,14 +57,12 @@ namespace Managers
             if (isPaused)
             {
                 //Pause frames
-                Time.timeScale = 0;
                 EventParam eventParam = new EventParam();
                 Managers.EventManager.TriggerEvent("PauseGame", eventParam);
             }
             else
             {
                 //Resume frames
-                Time.timeScale = 1;
                 EventParam eventParam = new EventParam();
                 Managers.EventManager.TriggerEvent("ResumeGame", eventParam);
             }
@@ -70,16 +86,32 @@ namespace Managers
             //If no objective are left
             if (objectiveList.Count == 0)
             {
-                //Display win
-                Debug.Log("YOU COLLECTED ALL OBJECTIVES");
-                //Load next Level
-                //ADD END LEVEL SCREEN HERE (maybe add event that triggers screen pop up)
+                //Level Paused
+                isPaused = true;
+                //Level Complete
+                gameManager.levelCompleted = true;
+                //End Level
+                StartCoroutine(EndLevel());
+
             }
-            else
+            else if(!isPaused)
             {
                 //Update level timer
                 levelTimer += Time.deltaTime;
             }
+        }
+
+        IEnumerator EndLevel()
+        {
+			//Start Confetti!
+			endLevelParticles1.Play();
+			endLevelParticles2.Play();
+			endLevelParticles3.Play();
+            //Wait
+            yield return new WaitForSeconds(3.0f);
+            //Display Menu
+            EventParam eventParam = new EventParam();
+            Managers.EventManager.TriggerEvent("EndLevel", eventParam);
         }
     }
 }

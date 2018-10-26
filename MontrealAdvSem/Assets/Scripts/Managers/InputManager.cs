@@ -6,12 +6,19 @@ namespace Managers
 {
     public class InputManager : Singleton<InputManager>
     {
+        GameManager gameManager;
+
         [Header("Player Control Booleans")]
         public bool playerJump;
         public bool playerSpawn;
         public bool playerAction;
         public bool levelReset;
         public bool levelPause;
+
+        private void Start()
+        {
+            gameManager = Managers.GameManager.Instance;
+        }
 
         private void Update()
         {
@@ -25,13 +32,13 @@ namespace Managers
 
         void InputEvents()
         {
-            if (levelPause)
+            if (levelPause && !gameManager.levelCompleted)
             {
                 //Pause Level
                 EventParam eventParam = new EventParam();
                 Managers.EventManager.TriggerEvent("PauseToggle", eventParam);
             }
-            if (levelReset)
+            if (levelReset && !gameManager.levelCompleted)
             {
                 //Reset Level
                 EventParam eventParam = new EventParam();

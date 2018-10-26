@@ -6,24 +6,24 @@ using UnityEngine;
 public class Event_UIUpdate : MonoBehaviour 
 {
 	//Manager Instance
-	Managers.LevelManager levelManager;
 	Managers.UiManager uiManager;
 
 	//Actions
 	private Action<EventParam> aUpdateBlockQueue;
 	private Action<EventParam> aPauseGame;
 	private Action<EventParam> aResumeGame;
+	private Action<EventParam> aEndLevel;
 
 	private void Awake()
 	{
 		aUpdateBlockQueue = new Action<EventParam>(UpdateBlockQueue);
 		aPauseGame = new Action<EventParam>(PauseGame);
 		aResumeGame = new Action<EventParam>(ResumeGame);
+		aEndLevel = new Action<EventParam>(EndLevel);
 	}
 
 	private void Start()
 	{
-		levelManager = Managers.LevelManager.Instance;
 		uiManager = Managers.UiManager.Instance;
 	}
 
@@ -32,6 +32,7 @@ public class Event_UIUpdate : MonoBehaviour
         Managers.EventManager.StartListening("UpdateBlockQueue", aUpdateBlockQueue);
 		Managers.EventManager.StartListening("PauseGame", aPauseGame);
 		Managers.EventManager.StartListening("ResumeGame", aResumeGame);
+		Managers.EventManager.StartListening("EndLevel", aEndLevel);
 	}
 
 	void OnDisable()
@@ -39,6 +40,7 @@ public class Event_UIUpdate : MonoBehaviour
         Managers.EventManager.StopListening("UpdateBlockQueue", aUpdateBlockQueue);
 		Managers.EventManager.StopListening("PauseGame", aPauseGame);
 		Managers.EventManager.StopListening("ResumeGame", aResumeGame);
+		Managers.EventManager.StopListening("EndLevel", aEndLevel);
 	}
 
 	void UpdateBlockQueue(EventParam eventParam)
@@ -54,5 +56,10 @@ public class Event_UIUpdate : MonoBehaviour
 	void ResumeGame(EventParam eventParam)
 	{
 		uiManager.ResumeGame();
+	}
+
+	void EndLevel(EventParam eventParam)
+	{
+		uiManager.EndLevelMenu();
 	}
 }

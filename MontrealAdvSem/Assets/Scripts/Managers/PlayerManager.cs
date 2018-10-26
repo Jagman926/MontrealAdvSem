@@ -7,6 +7,7 @@ namespace Managers
     public class PlayerManager : Singleton<PlayerManager>
     {
         //Manager
+        LevelManager levelManager;
         InputManager inputManager;
         ScenesManager scenesManager;
         BlockType blockType;
@@ -33,6 +34,7 @@ namespace Managers
         void Start()
         {
             //Manager instance
+            levelManager = Managers.LevelManager.Instance;
             inputManager = Managers.InputManager.Instance;
             scenesManager = Managers.ScenesManager.Instance;
             //Script reference
@@ -49,7 +51,10 @@ namespace Managers
 
         void Update()
         {
-            UpdateSpawnTiming();
+            if (!levelManager.isPaused)
+            {
+                UpdateSpawnTiming();
+            }
         }
 
         void LoadBlockQueue()
@@ -66,10 +71,10 @@ namespace Managers
 
         void UpdateSpawnTiming()
         {
-            if(currPlayer == null)
+            if (currPlayer == null)
             {
-            //Spawn first player
-            InstantiatePlayer();
+                //Spawn first player
+                InstantiatePlayer();
             }
             //Check if new player needs to spawn
             if ((inputManager.playerSpawn || spawnNewPlayer) && !playerZoneCheckScript.inNoDormantZone)
@@ -90,9 +95,9 @@ namespace Managers
         void UpdateSpawnTimer()
         {
             //adjust timer
-            if(spawnTimer > 0.0f)
+            if (spawnTimer > 0.0f)
             {
-                if(!playerZoneCheckScript.inNoDormantZone)
+                if (!playerZoneCheckScript.inNoDormantZone)
                 {
                     spawnTimer -= Time.deltaTime;
                 }

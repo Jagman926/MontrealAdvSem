@@ -14,6 +14,7 @@ namespace Managers
         private UnityAction mUpdateBlockQueueListener;
 
         //Managers
+        GameManager gameManager;
         PlayerManager playerManager;
         LevelManager levelManager;
 
@@ -31,10 +32,22 @@ namespace Managers
         private int BlockQueueSize;
 
         [Header("Pause UI")]
-		[SerializeField]
-		private GameObject pauseMenu;
-		[SerializeField]
-		private Button returnButton;
+        [SerializeField]
+        private GameObject pauseMenu;
+        [SerializeField]
+        private Button returnButton;
+
+        [Header("End Level UI")]
+        [SerializeField]
+        private GameObject endLevelMenu;
+        [SerializeField]
+        private Button nextLevelButton;
+        [SerializeField]
+        private TextMeshProUGUI retryCount;
+        [SerializeField]
+        private TextMeshProUGUI levelTotalTime;
+        [SerializeField]
+        private TextMeshProUGUI levelTime;
 
 
         private void Start()
@@ -42,13 +55,17 @@ namespace Managers
             //Manager
             levelManager = Managers.LevelManager.Instance;
             playerManager = Managers.PlayerManager.Instance;
+            gameManager = Managers.GameManager.Instance;
         }
-        
+
         private void Update()
         {
-            UpdateSpawnTimer();
-            UpdatePlayerCount();
-            UpdateObjectivesCollected();
+            if (!levelManager.isPaused)
+            {
+                UpdateSpawnTimer();
+                UpdatePlayerCount();
+                UpdateObjectivesCollected();
+            }
         }
 
         public void LoadBlockQueueUI()
@@ -83,7 +100,7 @@ namespace Managers
 
         public void UpdateBlockQueue()
         {
-            if(BlockQueueUI == null)
+            if (BlockQueueUI == null)
             {
                 //Load block queue
                 LoadBlockQueueUI();
@@ -94,7 +111,7 @@ namespace Managers
                 BlockQueueSize = playerManager.BlockQueue.Count;
                 for (int i = 0; i < BlockQueueUI.Count; i++)
                 {
-                    if(i < BlockQueueSize)
+                    if (i < BlockQueueSize)
                     {
                         BlockQueueUI[i].color = playerManager.BlockQueue.ToArray()[i].GetComponent<SpriteRenderer>().color;
                     }
@@ -116,32 +133,61 @@ namespace Managers
             objectivesCollectedText.text = (levelManager.collectedObjectives + "/" + levelManager.maxObjectives).ToString();
         }
 
-		public void PauseGame()
-		{
-			//Activate menu
-			pauseMenu.SetActive(true);
-			StartCoroutine (PauseBuffer());
-			//Set return as selected button
-			returnButton.Select();
-			//Set pause check to false
-			playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
-		}
+        public void PauseGame()
+        {
+            //Activate menu
+            pauseMenu.SetActive(true);
+            StartCoroutine(PauseBuffer());
+            //Set return as selected button
+            returnButton.Select();
+            //Set pause check to false
+            playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
+        }
 
-		public void ResumeGame()
-		{
-			//Deactivate select
-			EventSystem.current.SetSelectedGameObject(null);
-			//Deactivate menu
-			pauseMenu.SetActive(false);
-			StartCoroutine (PauseBuffer());
-		}
+        public void ResumeGame()
+        {
+            //Deactivate select
+            EventSystem.current.SetSelectedGameObject(null);
+            //Deactivate menu
+            pauseMenu.SetActive(false);
+            StartCoroutine(PauseBuffer());
+        }
 
-		IEnumerator PauseBuffer()
-    	{
-		    //Wait
+        IEnumerator PauseBuffer()
+        {
+            //Wait
             yield return new WaitForSeconds(0.1f);
-		    //Set pause check to true
-		    playerManager.GetComponent<PlayerMovement>().pauseCheck = true;
-     	}
+            //Set pause check to true
+            playerManager.GetComponent<PlayerMovement>().pauseCheck = true;
+        }
+
+        public void EndLevelMenu()
+        {
+            //Activate menu
+            endLevelMenu.SetActive(true);
+            StartCoroutine(PauseBuffer());
+            //Set Next level as selected button
+            nextLevelButton.Select();
+            //Set pause check to false
+            playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
+            //Update level menu text
+            UpdateEndLevelMenu();
+        }
+
+        private void UpdateEndLevelMenu()
+        {
+            //Retrieve Data from Game Manager
+            retryCount.text = gameManager.levelRetries.ToString();
+            levelTime.text = levelManager.levelTimer.ToString("F2");
+            //If no retries than set total time to level time
+            if(gameManager.levelRetries > 0)
+            {
+                levelTotalTime.text = gameManager.levelTotalTimer.ToString("F2");
+            }
+            else
+            {
+                levelTotalTime.text = levelTime.text;
+            }
+        }
     }
 }
