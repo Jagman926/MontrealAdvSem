@@ -88,14 +88,16 @@ namespace Managers
             {
                 //Set text to warning color
                 spawnTimerText.faceColor = spawnTimerWarningColor;
+                //Set text to spawn timer
+                spawnTimerText.text = playerManager.spawnTimer.ToString("F2");
             }
             else
             {
                 //Reset color
                 spawnTimerText.faceColor = Color.white;
+                //Set text to spawn timer
+                spawnTimerText.text = playerManager.spawnTimer.ToString("F0");
             }
-            //Set text to spawn timer
-            spawnTimerText.text = playerManager.spawnTimer.ToString("F2");
         }
 
         public void UpdateBlockQueue()
@@ -111,7 +113,8 @@ namespace Managers
                 BlockQueueSize = playerManager.BlockQueue.Count;
                 for (int i = 0; i < BlockQueueUI.Count; i++)
                 {
-                    if (i < BlockQueueSize)
+                    //Load block colors
+                    if (i < BlockQueueSize - 1)
                     {
                         BlockQueueUI[i].color = playerManager.BlockQueue.ToArray()[i].GetComponent<SpriteRenderer>().color;
                     }
@@ -126,6 +129,11 @@ namespace Managers
         void UpdatePlayerCount()
         {
             playerCountText.text = (playerManager.BlockQueue.Count - 1).ToString();
+            //Warning for 0 left
+            if(playerManager.BlockQueue.Count - 1 == 0)
+            {
+                playerCountText.color = spawnTimerWarningColor;
+            }
         }
 
         void UpdateObjectivesCollected()
@@ -180,7 +188,7 @@ namespace Managers
             retryCount.text = gameManager.levelRetries.ToString();
             levelTime.text = levelManager.levelTimer.ToString("F2");
             //If no retries than set total time to level time
-            if(gameManager.levelRetries > 0)
+            if (gameManager.levelRetries > 0)
             {
                 levelTotalTime.text = gameManager.levelTotalTimer.ToString("F2");
             }

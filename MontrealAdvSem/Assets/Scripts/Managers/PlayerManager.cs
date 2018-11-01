@@ -64,6 +64,8 @@ namespace Managers
             {
                 BlockQueue.Enqueue(blockType.ReturnBlockType(BlockList[i]));
             }
+            //Add final block
+            BlockQueue.Enqueue(blockType.ReturnBlockType(BlockType.BlockTypes.DORMANT));
             //Update Block Queue
             EventParam eventParam = new EventParam();
             Managers.EventManager.TriggerEvent("UpdateBlockQueue", eventParam);
