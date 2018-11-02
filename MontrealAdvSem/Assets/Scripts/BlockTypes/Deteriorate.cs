@@ -14,14 +14,18 @@ public bool isDormant;
     public int layerNumber;
     private Rigidbody2D rb;
 
-    [Header("Visual Components")]
-    public Color color;
-
 	[Header("Deteriorate Variables")]
 	public int hitsToBreak;
 	public int currentHits;
-	public Color break1;
-	public Color break2;
+
+    [Header("Sprite Components")]
+    public Sprite noBreak;
+	public Sprite break0;
+	public Sprite break1;
+    public Sprite break2;
+
+    [Header("Particle System")]
+    public ParticleSystem destroyPS;
 
 	void Start()
     {
@@ -51,8 +55,8 @@ public bool isDormant;
         rb.mass = mass;
         //Unfreeze rotation
         rb.constraints = RigidbodyConstraints2D.None;
-        //Change color
-        gameObject.GetComponent<SpriteRenderer>().color = color;
+        //Change sprite
+        gameObject.GetComponent<SpriteRenderer>().sprite = noBreak;
         //Change physics material
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
 		//Change tag
@@ -70,18 +74,24 @@ public bool isDormant;
 			//If hit once
 			if(currentHits == 1)
 			{
-				gameObject.GetComponent<SpriteRenderer>().color = break1;
+				gameObject.GetComponent<SpriteRenderer>().sprite = break0;
 			}
 			//twice
 			else if(currentHits == 2)
 			{
-				gameObject.GetComponent<SpriteRenderer>().color = break2;
+				gameObject.GetComponent<SpriteRenderer>().sprite = break1;
 			}
 			//thrice
 			else if(currentHits == 3)
 			{
-				Destroy(gameObject);
+				gameObject.GetComponent<SpriteRenderer>().sprite = break2;
 			}
+            //frice
+            else if(currentHits == 4)
+            {
+                Instantiate(destroyPS, gameObject.transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
 		}
     }
 }

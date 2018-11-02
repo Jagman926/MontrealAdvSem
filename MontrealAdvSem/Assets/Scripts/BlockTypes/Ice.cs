@@ -13,8 +13,8 @@ public class Ice : MonoBehaviour {
     public int layerNumber;
     private Rigidbody2D rb;
 
-    [Header("Visual Components")]
-    public Color color;
+    [Header("Sprite Components")]
+    public Sprite sprite;
 
 	[Header("Melt Variables")]
 	public int timeToMelt;
@@ -52,8 +52,8 @@ public class Ice : MonoBehaviour {
         rb.mass = mass;
         //Unfreeze rotation
         rb.constraints = RigidbodyConstraints2D.None;
-        //Change color
-        gameObject.GetComponent<SpriteRenderer>().color = color;
+        //Change sprite
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         //Change physics material
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
 		//Change tag
@@ -65,7 +65,7 @@ public class Ice : MonoBehaviour {
 	void MeltBlock()
 	{
 		//If it's still not fully melted
-		if(transform.localScale.y > 1.0f/timeToMelt)
+		if(transform.localScale.x > 1.0f/timeToMelt)
 		{
 			//Increment timer
 			meltingTimer += Time.deltaTime;
@@ -73,7 +73,7 @@ public class Ice : MonoBehaviour {
 			if(meltingTimer > 1.0f)
 			{
 				//Shrink block
-				transform.localScale -= new Vector3(0, 1.0f/timeToMelt, 0);
+				transform.localScale -= new Vector3(1.0f/timeToMelt, 1.0f/timeToMelt, 0);
 				//Reset timer
 				meltingTimer = 0.0f;
 			}

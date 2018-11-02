@@ -13,8 +13,8 @@ public class Float : MonoBehaviour {
     public int layerNumber;
     private Rigidbody2D rb;
 
-    [Header("Visual Components")]
-    public Color color;
+    [Header("Sprite Components")]
+    public Sprite sprite;
 
     void Start()
     {
@@ -45,12 +45,14 @@ public class Float : MonoBehaviour {
         rb.mass = mass;
         //Unfreeze rotation
         rb.constraints = RigidbodyConstraints2D.None;
-        //Change color
-        gameObject.GetComponent<SpriteRenderer>().color = color;
+        //Change sprite
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         //Change physics material
         gameObject.GetComponent<Collider2D>().sharedMaterial = physicsMaterial;
 		//Freeze Block
 		FreezeBlock();
+        //Activate particle system
+        gameObject.GetComponent<ParticleSystem>().Play();
 		//Change tag
 		gameObject.tag = "Dormant";
         //Change to updated

@@ -80,7 +80,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.03, y: 1.03}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -113,14 +113,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDormant: 0
-  physicsMaterial: {fileID: 6200000, guid: d0601a92bca1f3a4e8e3ccc814a02850, type: 2}
+  physicsMaterial: {fileID: 6200000, guid: 572be7edcfd1df0478d14e863cc8220c, type: 2}
   mass: 5
   layerNumber: 8
-  color: {r: 0.4339623, g: 0.22670251, b: 0.055268783, a: 1}
-  hitsToBreak: 3
+  hitsToBreak: 4
   currentHits: 0
-  break1: {r: 0.5849056, g: 0.39646956, b: 0.24003203, a: 1}
-  break2: {r: 0.754717, g: 0.6477339, b: 0.55891776, a: 1}
+  noBreak: {fileID: 21300000, guid: a027329455eb9414f8bfaa5cf6ea2cac, type: 3}
+  break0: {fileID: 21300000, guid: 7a0dec627a6fc6c46885a9d3fe519079, type: 3}
+  break1: {fileID: 21300000, guid: a4ca8282df394c44b9321835aa14176b, type: 3}
+  break2: {fileID: 21300000, guid: 5666f0999dbcb254fa8ac0bae18657da, type: 3}
+  destroyPS: {fileID: 198231736305603186, guid: 92bf1d449392fb64a83fbcc3c26b658d,
+    type: 2}
 --- !u!212 &212021596560142612
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -156,8 +159,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dd2730a5fd5474e62a2c5d4b9ff66074, type: 3}
-  m_Color: {r: 0.43529412, g: 0.22745098, b: 0.05490196, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a4ca8282df394c44b9321835aa14176b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

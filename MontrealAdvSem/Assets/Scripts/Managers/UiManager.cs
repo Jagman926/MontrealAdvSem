@@ -28,6 +28,7 @@ namespace Managers
 
         [Header("Player Count")]
         public TextMeshProUGUI playerCountText;
+        public Sprite blankSprite;
         private List<Image> BlockQueueUI;
         private int BlockQueueSize;
 
@@ -116,11 +117,11 @@ namespace Managers
                     //Load block colors
                     if (i < BlockQueueSize - 1)
                     {
-                        BlockQueueUI[i].color = playerManager.BlockQueue.ToArray()[i].GetComponent<SpriteRenderer>().color;
+                        BlockQueueUI[i].sprite = playerManager.BlockQueue.ToArray()[i].GetComponent<SpriteRenderer>().sprite;
                     }
                     else
                     {
-                        BlockQueueUI[i].color = Color.white;
+                        BlockQueueUI[i].sprite = blankSprite;
                     }
                 }
             }

@@ -21,6 +21,7 @@ namespace Managers
 
         [Header("Player Spawn Settings")]
         public Color playerColor;
+        public Sprite playerSprite;
         [HideInInspector]
         public float spawnTimer = 0;
         public float spawnTimeSeconds = 0;
@@ -128,6 +129,8 @@ namespace Managers
                 spawnNewPlayer = false;
                 //Set color to player color
                 currPlayer.GetComponent<SpriteRenderer>().color = playerColor;
+                //Set sprite to player sprite
+                currPlayer.GetComponent<SpriteRenderer>().sprite = playerSprite;
                 //Update Block Queue UI
                 EventParam eventParam = new EventParam();
                 Managers.EventManager.TriggerEvent("UpdateBlockQueue", eventParam);

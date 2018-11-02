@@ -77,6 +77,7 @@
      <Compile Include="Assets\Scripts\Managers\Singleton\ManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\Managers\UiManager.cs" />
      <Compile Include="Assets\Scripts\Objective\ObjectiveScript.cs" />
+     <Compile Include="Assets\Scripts\ParticleSystem\destroyParticleSystem.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\ZoneCheck.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
