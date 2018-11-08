@@ -131,7 +131,7 @@ namespace Managers
         {
             playerCountText.text = (playerManager.BlockQueue.Count - 1).ToString();
             //Warning for 0 left
-            if(playerManager.BlockQueue.Count - 1 == 0)
+            if (playerManager.BlockQueue.Count - 1 == 0)
             {
                 playerCountText.color = spawnTimerWarningColor;
             }
@@ -170,13 +170,22 @@ namespace Managers
             playerManager.GetComponent<PlayerMovement>().pauseCheck = true;
         }
 
+        IEnumerator SelectButtonWait(float seconds)
+        {
+            //Wait
+            yield return new WaitForSeconds(seconds);
+            //Set Next level as selected button
+            nextLevelButton.Select();
+        }
+
         public void EndLevelMenu()
         {
             //Activate menu
             endLevelMenu.SetActive(true);
+            //Pause Buffer
             StartCoroutine(PauseBuffer());
-            //Set Next level as selected button
-            nextLevelButton.Select();
+            //Select button wait
+            StartCoroutine(SelectButtonWait(2.0f));
             //Set pause check to false
             playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
             //Update level menu text
