@@ -61,7 +61,7 @@ namespace Managers
 
         private void Update()
         {
-            if (!levelManager.isPaused)
+            if (!levelManager.isPaused && !gameManager.levelCompleted)
             {
                 UpdateSpawnTimer();
                 UpdatePlayerCount();
@@ -149,8 +149,6 @@ namespace Managers
             StartCoroutine(PauseBuffer());
             //Set return as selected button
             returnButton.Select();
-            //Set pause check to false
-            playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
         }
 
         public void ResumeGame()
@@ -166,8 +164,6 @@ namespace Managers
         {
             //Wait
             yield return new WaitForSeconds(0.1f);
-            //Set pause check to true
-            playerManager.GetComponent<PlayerMovement>().pauseCheck = true;
         }
 
         IEnumerator SelectButtonWait(float seconds)
@@ -182,12 +178,8 @@ namespace Managers
         {
             //Activate menu
             endLevelMenu.SetActive(true);
-            //Pause Buffer
-            StartCoroutine(PauseBuffer());
             //Select button wait
             StartCoroutine(SelectButtonWait(0.5f));
-            //Set pause check to false
-            playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
             //Update level menu text
             UpdateEndLevelMenu();
         }

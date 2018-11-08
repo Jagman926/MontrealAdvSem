@@ -44,7 +44,7 @@ namespace Managers
 
         private void Update()
         {
-            if (!isPaused)
+            if (!isPaused && !gameManager.levelCompleted)
             {
                 CheckObjectives();
             }
@@ -86,15 +86,13 @@ namespace Managers
             //If no objective are left
             if (objectiveList.Count == 0)
             {
-                //Level Paused
-                isPaused = true;
                 //Level Complete
                 gameManager.levelCompleted = true;
                 //End Level
                 StartCoroutine(EndLevel());
 
             }
-            else if (!isPaused)
+            else if (!isPaused && !gameManager.levelCompleted)
             {
                 //Update level timer
                 levelTimer += Time.deltaTime;

@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     //Pause Check
     [HideInInspector]
-    public bool pauseCheck;
+    public bool isPaused;
     //Current Player
     private GameObject currPlayer;
     private Rigidbody2D currPlayerRB;
@@ -24,13 +24,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        //set pause check
-        pauseCheck = true;
+        isPaused = false;
     }
 
     void Update()
     {
-        if(currPlayer != null && pauseCheck)
+        if(currPlayer != null && !isPaused)
         {
             //Update player movement
             UpdateMovement();

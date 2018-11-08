@@ -7,6 +7,7 @@ namespace Managers
     public class PlayerManager : Singleton<PlayerManager>
     {
         //Manager
+        GameManager gameManager;
         LevelManager levelManager;
         InputManager inputManager;
         ScenesManager scenesManager;
@@ -35,6 +36,7 @@ namespace Managers
         void Start()
         {
             //Manager instance
+            gameManager = Managers.GameManager.Instance;
             levelManager = Managers.LevelManager.Instance;
             inputManager = Managers.InputManager.Instance;
             scenesManager = Managers.ScenesManager.Instance;
@@ -52,10 +54,11 @@ namespace Managers
 
         void Update()
         {
-            if (!levelManager.isPaused)
+            if (!levelManager.isPaused && !gameManager.levelCompleted)
             {
                 UpdateSpawnTiming();
             }
+            playerMovementScript.isPaused = levelManager.isPaused;
         }
 
         void LoadBlockQueue()
