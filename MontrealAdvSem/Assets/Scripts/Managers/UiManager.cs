@@ -185,7 +185,7 @@ namespace Managers
             //Pause Buffer
             StartCoroutine(PauseBuffer());
             //Select button wait
-            StartCoroutine(SelectButtonWait(2.0f));
+            StartCoroutine(SelectButtonWait(0.5f));
             //Set pause check to false
             playerManager.GetComponent<PlayerMovement>().pauseCheck = false;
             //Update level menu text
