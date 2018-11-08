@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Level 1
   sceneName: Level_1
-  levelBlockOrder: 00000000000000000000000000000000
+  levelBlockOrder: 000000000000000000000000
