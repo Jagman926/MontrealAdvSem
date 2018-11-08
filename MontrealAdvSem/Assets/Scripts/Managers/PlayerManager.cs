@@ -149,6 +149,9 @@ namespace Managers
             BlockQueue.Dequeue();
             //Set Color to "dormant"
             currPlayer.GetComponent<SpriteRenderer>().color = Color.white;
+            //Play Dormant sound
+            EventParam eventParam = new EventParam();
+            Managers.EventManager.TriggerEvent("PlayLandSound", eventParam);
         }
     }
 }

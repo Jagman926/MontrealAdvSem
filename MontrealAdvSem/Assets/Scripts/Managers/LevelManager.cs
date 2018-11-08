@@ -18,13 +18,13 @@ namespace Managers
         public int maxObjectives;
         public int collectedObjectives;
 
-		[Header("Particles")]
-		[SerializeField]
-		private ParticleSystem endLevelParticles1;
-		[SerializeField]
-		private ParticleSystem endLevelParticles2;
-		[SerializeField]
-		private ParticleSystem endLevelParticles3;
+        [Header("Particles")]
+        [SerializeField]
+        private ParticleSystem endLevelParticles1;
+        [SerializeField]
+        private ParticleSystem endLevelParticles2;
+        [SerializeField]
+        private ParticleSystem endLevelParticles3;
 
 
 
@@ -94,7 +94,7 @@ namespace Managers
                 StartCoroutine(EndLevel());
 
             }
-            else if(!isPaused)
+            else if (!isPaused)
             {
                 //Update level timer
                 levelTimer += Time.deltaTime;
@@ -103,14 +103,16 @@ namespace Managers
 
         IEnumerator EndLevel()
         {
-			//Start Confetti!
-			endLevelParticles1.Play();
-			endLevelParticles2.Play();
-			endLevelParticles3.Play();
+            //Play cheer audio
+            EventParam eventParam = new EventParam();
+            Managers.EventManager.TriggerEvent("PlayCheerSound", eventParam);
+            //Start Confetti!
+            endLevelParticles1.Play();
+            endLevelParticles2.Play();
+            endLevelParticles3.Play();
             //Wait
             yield return new WaitForSeconds(3.0f);
             //Display Menu
-            EventParam eventParam = new EventParam();
             Managers.EventManager.TriggerEvent("EndLevel", eventParam);
         }
     }

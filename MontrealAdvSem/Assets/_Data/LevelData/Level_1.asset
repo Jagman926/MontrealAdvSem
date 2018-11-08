@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3252e491041677543a8065ee357e4df8, type: 3}
-  m_Name: Level_0
+  m_Name: Level_1
   m_EditorClassIdentifier: 
-  objectName: Level 0
-  sceneName: Level_0
-  levelBlockOrder: 000000000000000000000000
+  objectName: Level 1
+  sceneName: Level_1
+  levelBlockOrder: 00000000000000000000000000000000

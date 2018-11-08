@@ -60,6 +60,9 @@ public class PlayerMovement : MonoBehaviour
         if (Managers.InputManager.Instance.playerJump && isGrounded)
         {
             currPlayerRB.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            //Play jump sound
+            EventParam eventParam = new EventParam();
+            Managers.EventManager.TriggerEvent("PlayJumpSound", eventParam);
         }
         //Downward Force
         if (!isGrounded)

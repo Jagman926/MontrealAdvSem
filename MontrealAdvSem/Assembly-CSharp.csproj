@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\BlockTypes\Swap.cs" />
      <Compile Include="Assets\Scripts\EventSystem\Events\Event_InputButtons.cs" />
      <Compile Include="Assets\Scripts\EventSystem\Events\Event_LevelButtons.cs" />
+     <Compile Include="Assets\Scripts\EventSystem\Events\Event_PlaySound.cs" />
      <Compile Include="Assets\Scripts\EventSystem\Events\Event_SceneButtons.cs" />
      <Compile Include="Assets\Scripts\EventSystem\Events\Event_UIUpdate.cs" />
      <Compile Include="Assets\Scripts\EventSystem\Trigger\Trigger_LevelButtons.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Managers\ScenesManager.cs" />
      <Compile Include="Assets\Scripts\Managers\Singleton\ManagerSingleton.cs" />
+     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
      <Compile Include="Assets\Scripts\Managers\UiManager.cs" />
      <Compile Include="Assets\Scripts\Objective\ObjectiveScript.cs" />
      <Compile Include="Assets\Scripts\ParticleSystem\destroyParticleSystem.cs" />

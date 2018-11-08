@@ -9,6 +9,7 @@ public struct EventParam
     public int intParam;
     public float floatParam;
     public bool boolParam;
+    public AudioClip audioParam;
 }
 
 namespace Managers
