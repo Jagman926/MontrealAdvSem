@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     //Pause Check
     [HideInInspector]
     public bool isPaused;
+    [HideInInspector]
+    public bool endLevel;
     //Current Player
     private GameObject currPlayer;
     private Rigidbody2D currPlayerRB;
@@ -25,11 +27,12 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         isPaused = false;
+        endLevel = false;
     }
 
     void Update()
     {
-        if(currPlayer != null && !isPaused)
+        if(currPlayer != null && !isPaused && !endLevel)
         {
             //Update player movement
             UpdateMovement();

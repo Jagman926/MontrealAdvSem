@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using TMPro;
+using DG.Tweening;
 
 namespace Managers
 {
@@ -144,8 +145,13 @@ namespace Managers
 
         public void PauseGame()
         {
+            //Reset Pause Menu
+            pauseMenu.transform.localScale = Vector3.one;
             //Activate menu
             pauseMenu.SetActive(true);
+            //Tween Menu
+            pauseMenu.transform.DOScale(Vector3.zero, 0.25f).From();
+            //Pause Buffer
             StartCoroutine(PauseBuffer());
             //Set return as selected button
             returnButton.Select();
@@ -153,6 +159,8 @@ namespace Managers
 
         public void ResumeGame()
         {
+            //Reset Pause Menu
+            pauseMenu.transform.localScale = Vector3.one;
             //Deactivate select
             EventSystem.current.SetSelectedGameObject(null);
             //Deactivate menu
@@ -178,6 +186,8 @@ namespace Managers
         {
             //Activate menu
             endLevelMenu.SetActive(true);
+            //Tween Menu
+            endLevelMenu.transform.DOScale(Vector3.zero, 0.25f).From();
             //Select button wait
             StartCoroutine(SelectButtonWait(0.5f));
             //Update level menu text

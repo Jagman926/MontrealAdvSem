@@ -110,6 +110,8 @@ namespace Managers
             endLevelParticles3.Play();
             //Wait
             yield return new WaitForSeconds(3.0f);
+            //Pause
+            isPaused = true;
             //Display Menu
             Managers.EventManager.TriggerEvent("EndLevel", eventParam);
         }
