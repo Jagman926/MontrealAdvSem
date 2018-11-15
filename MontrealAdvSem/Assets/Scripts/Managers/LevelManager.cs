@@ -8,6 +8,7 @@ namespace Managers
     {
         //Manager Instance
         GameManager gameManager;
+        PlayerManager playerManager;
 
         [Header("Level Settings")]
         public float levelTimer;
@@ -26,16 +27,19 @@ namespace Managers
         [SerializeField]
         private ParticleSystem endLevelParticles3;
 
-
-
-        private void Start()
+        private void Awake()
         {
             //Manager Instance
             gameManager = Managers.GameManager.Instance;
+            playerManager = Managers.PlayerManager.Instance;
+        }
+
+        private void Start()
+        {
             //Set pause
             isPaused = false;
             //Set levelTimer
-            levelTimer = 0.0f;
+            levelTimer = playerManager.spawnTimeSeconds;
             //Load Objective List
             LoadObjectivesList();
             //Start new level GameManager

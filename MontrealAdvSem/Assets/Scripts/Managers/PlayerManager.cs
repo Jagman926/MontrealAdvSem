@@ -24,8 +24,8 @@ namespace Managers
         public Color playerColor;
         public Sprite playerSprite;
         [HideInInspector]
-        public float spawnTimer = 0;
-        public float spawnTimeSeconds = 0;
+        public float spawnTimer = 0.0f;
+        public float spawnTimeSeconds;
         private bool spawnNewPlayer;
 
         [Header("Player Container")]
@@ -45,6 +45,8 @@ namespace Managers
             blockType = GetComponent<BlockType>();
             //Get player spawn
             playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
+            //Reset spawn timer
+            spawnTimer = spawnTimeSeconds;
             //Load block queue
             BlockList = scenesManager.currentLevel.levelBlockOrder;
             LoadBlockQueue();
@@ -111,7 +113,7 @@ namespace Managers
             //If timer run out
             else
             {
-                spawnTimer = 0.0f;
+                spawnTimer = spawnTimeSeconds;
                 spawnNewPlayer = true;
             }
         }

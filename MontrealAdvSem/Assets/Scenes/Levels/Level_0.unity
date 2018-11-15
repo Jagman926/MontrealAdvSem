@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a565752de550bc144aa97b99bc597d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTimerText: {fileID: 0}
+  spawnTimerText: {fileID: 173298435}
   spawnTimerWarning: 5
   spawnTimerWarningColor: {r: 1, g: 0, b: 0, a: 1}
   objectivesCollectedText: {fileID: 1265154466}
