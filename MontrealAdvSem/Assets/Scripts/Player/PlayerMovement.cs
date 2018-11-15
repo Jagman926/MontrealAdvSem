@@ -32,11 +32,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(currPlayer != null && !isPaused && !endLevel)
+        if(currPlayer != null)
         {
-            //Update player movement
-            UpdateMovement();
-            UpdateJump();
+            if(!isPaused && !endLevel)
+            {
+                //Update player movemen
+                UpdateMovement();
+                UpdateJump();
+            }
+            else
+            {
+                currPlayerRB.velocity = Vector3.zero;
+            }
         }
     }
 

@@ -21,12 +21,12 @@ namespace Managers
         }
 
         private void Update()
-        {
-            levelPause = Input.GetButtonDown("Pause");
+        { 
             playerJump = Input.GetButtonDown("Jump");
             playerSpawn = Input.GetButtonDown("Spawn");
             playerAction = Input.GetButtonDown("Action");
             levelReset = Input.GetButtonDown("Reset");
+            levelPause = Input.GetButtonDown("Pause");
             InputEvents();
         }
 
