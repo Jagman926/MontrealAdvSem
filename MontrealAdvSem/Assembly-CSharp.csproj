@@ -130,7 +130,9 @@
      <Compile Include="Assets\Scripts\Managers\Singleton\ManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
      <Compile Include="Assets\Scripts\Managers\UiManager.cs" />
+     <Compile Include="Assets\Scripts\Objective\MovableScript.cs" />
      <Compile Include="Assets\Scripts\Objective\ObjectiveScript.cs" />
+     <Compile Include="Assets\Scripts\Objective\PlateScript.cs" />
      <Compile Include="Assets\Scripts\ParticleSystem\destroyParticleSystem.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\ZoneCheck.cs" />
