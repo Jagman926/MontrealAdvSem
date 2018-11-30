@@ -8,4 +8,6 @@ public class Level_Data : ScriptableObject
 	public string objectName = "New Level";
 	public string sceneName = "Level_New";
 	public List<BlockType.BlockTypes> levelBlockOrder;
+	public List<string> levelHighscores_Initials;
+	public List<string> levelHighscores_values; 
 }

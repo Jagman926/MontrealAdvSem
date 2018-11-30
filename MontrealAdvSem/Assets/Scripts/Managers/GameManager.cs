@@ -10,6 +10,8 @@ namespace Managers
     {
         //Manager instances
         ScenesManager scenesManager;
+	    [Header("Curent Initials")]
+	    public char[] currentInitials;
 
         [Header("Current Level Stats")]
         public bool levelCompleted;
@@ -19,6 +21,9 @@ namespace Managers
         private void Start()
         {
             scenesManager = Managers.ScenesManager.Instance;
+            //Init initials
+            currentInitials = new char[3];
+            SetCurrentInitials('A', 'A', 'A');
         }
 
         private void Update()
@@ -45,6 +50,13 @@ namespace Managers
         private void UpdateTimers()
         {
             levelTotalTimer += Time.deltaTime;
+        }
+
+        public void SetCurrentInitials(char char1, char char2, char char3)
+        {
+            currentInitials[0] = char1;
+            currentInitials[1] = char2;
+            currentInitials[2] = char3;
         }
     }
 }

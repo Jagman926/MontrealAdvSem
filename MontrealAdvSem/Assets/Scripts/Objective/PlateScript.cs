@@ -6,12 +6,18 @@ public class PlateScript : MonoBehaviour
 {
     [SerializeField]
     private GameObject movableObject;
-
+    [SerializeField]
+    private Color offColor;
+    [SerializeField]
+    private Color onColor;
+    private SpriteRenderer spriteRenderer;
+    //Collider list
     private List<Collider2D> colliderList;
 
     void Start()
     {
         colliderList = new List<Collider2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -20,6 +26,7 @@ public class PlateScript : MonoBehaviour
         {
 			//Add object that entered trigger
             colliderList.Add(col);
+            spriteRenderer.color = onColor;
             movableObject.GetComponent<MovableScript>().move = true;
         }
     }
@@ -36,6 +43,7 @@ public class PlateScript : MonoBehaviour
 			//If Empty reset move
             if (colliderList.Count == 0)
             {
+                spriteRenderer.color = offColor;
                 movableObject.GetComponent<MovableScript>().resetMove = true;
             }
         }
