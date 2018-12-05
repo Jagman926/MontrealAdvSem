@@ -13,6 +13,7 @@ public class Event_UIUpdate : MonoBehaviour
 	private Action<EventParam> aPauseGame;
 	private Action<EventParam> aResumeGame;
 	private Action<EventParam> aEndLevel;
+	private Action<EventParam> aHighscore;
 
 	private void Awake()
 	{
@@ -20,6 +21,7 @@ public class Event_UIUpdate : MonoBehaviour
 		aPauseGame = new Action<EventParam>(PauseGame);
 		aResumeGame = new Action<EventParam>(ResumeGame);
 		aEndLevel = new Action<EventParam>(EndLevel);
+		aHighscore = new Action<EventParam>(Highscore);
 	}
 
 	private void Start()
@@ -33,6 +35,7 @@ public class Event_UIUpdate : MonoBehaviour
 		Managers.EventManager.StartListening("PauseGame", aPauseGame);
 		Managers.EventManager.StartListening("ResumeGame", aResumeGame);
 		Managers.EventManager.StartListening("EndLevel", aEndLevel);
+		Managers.EventManager.StartListening("Highscore", aHighscore);
 	}
 
 	void OnDisable()
@@ -41,6 +44,7 @@ public class Event_UIUpdate : MonoBehaviour
 		Managers.EventManager.StopListening("PauseGame", aPauseGame);
 		Managers.EventManager.StopListening("ResumeGame", aResumeGame);
 		Managers.EventManager.StopListening("EndLevel", aEndLevel);
+		Managers.EventManager.StopListening("Highscore", aHighscore);
 	}
 
 	void UpdateBlockQueue(EventParam eventParam)
@@ -61,5 +65,10 @@ public class Event_UIUpdate : MonoBehaviour
 	void EndLevel(EventParam eventParam)
 	{
 		uiManager.EndLevelMenu();
+	}
+
+	void Highscore(EventParam eventParam)
+	{
+		uiManager.HighscoreMenu();
 	}
 }

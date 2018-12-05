@@ -51,6 +51,13 @@ namespace Managers
         [SerializeField]
         private TextMeshProUGUI levelTime;
 
+        [Header("Highscore UI")]
+        [SerializeField]
+        private GameObject highscoreMenu;
+        [SerializeField]
+        private Button continueButton;
+
+
 
         private void Start()
         {
@@ -174,12 +181,12 @@ namespace Managers
             yield return new WaitForSeconds(0.1f);
         }
 
-        IEnumerator SelectButtonWait(float seconds)
+        IEnumerator SelectButtonWait(float seconds, Button button)
         {
             //Wait
             yield return new WaitForSeconds(seconds);
             //Set Next level as selected button
-            nextLevelButton.Select();
+            button.Select();
         }
 
         public void EndLevelMenu()
@@ -189,7 +196,7 @@ namespace Managers
             //Tween Menu
             endLevelMenu.transform.DOScale(Vector3.zero, 0.25f).From();
             //Select button wait
-            StartCoroutine(SelectButtonWait(0.5f));
+            StartCoroutine(SelectButtonWait(0.5f, nextLevelButton));
             //Update level menu text
             UpdateEndLevelMenu();
         }
@@ -208,6 +215,29 @@ namespace Managers
             {
                 levelTotalTime.text = levelTime.text;
             }
+        }
+
+        public void HighscoreMenu()
+        {
+            //Activate menu
+            highscoreMenu.SetActive(true);
+            //Tween Menu
+            highscoreMenu.transform.DOScale(Vector3.zero, 0.25f).From();
+            //Select button wait
+            StartCoroutine(SelectButtonWait(0.5f, continueButton));
+        }
+
+        public void HighscoreToEndLevelTransition()
+        {
+            //Reset Pause Menu
+            highscoreMenu.transform.localScale = Vector3.one;
+            //Deactivate select
+            EventSystem.current.SetSelectedGameObject(null);
+            //Deactivate menu
+            highscoreMenu.SetActive(false);
+            StartCoroutine(PauseBuffer());
+            //Call end level menu
+            EndLevelMenu();
         }
     }
 }

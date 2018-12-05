@@ -116,8 +116,17 @@ namespace Managers
             yield return new WaitForSeconds(3.0f);
             //Pause
             isPaused = true;
-            //Display Menu
-            Managers.EventManager.TriggerEvent("EndLevel", eventParam);
+            //Check for highscore
+            if (true)
+            {
+                //If new highscore, display highscore menu
+                Managers.EventManager.TriggerEvent("Highscore", eventParam);
+            }
+            else
+            {
+                //Display Menu
+                Managers.EventManager.TriggerEvent("EndLevel", eventParam);
+            }
         }
     }
 }

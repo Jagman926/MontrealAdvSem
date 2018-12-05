@@ -9,69 +9,114 @@ public class InitialComboScript : MonoBehaviour
 {
     Managers.GameManager gameManager;
 
+    [Header("Initial 1")]
     [SerializeField]
-    private Button initial1;
-    private TextMeshProUGUI initial1text;
+    private GameObject initial1;
+    private Text initial1_text;
+    private int initial1CharNum;
+    [Header("Initial 2")]
     [SerializeField]
-    private Button initial2;
-    private TextMeshProUGUI initial2text;
+    private GameObject initial2;
+    private Text initial2_text;
+    private int initial2CharNum;
+    [Header("Initial 3")]
     [SerializeField]
-    private Button initial3;
-    private TextMeshProUGUI initial3text;
+    private GameObject initial3;
+    private Text initial3_text;
+    private int initial3CharNum;
 
     //Character list
     private char[] charList;
-
-    //Button Selected
-    private bool buttonSelected;
-    private Button selectedButton;
+    private string charString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ*~$?!";
 
     void Start()
     {
         gameManager = Managers.GameManager.Instance;
-        //Get text component from each button
-        initial1text = initial1.GetComponent<TextMeshProUGUI>();
-        initial2text = initial2.GetComponent<TextMeshProUGUI>();
-        initial3text = initial3.GetComponent<TextMeshProUGUI>();
-        //Load last entered intials (if not auto uses 'AAA')
-        LoadCurrentInitials();
+        //Set intials to AAA
+        GetCurrentInitials();
+        //Load text fields from gameobjects
+        initial1_text = initial1.GetComponent<Text>();
+        initial2_text = initial2.GetComponent<Text>();
+        initial3_text = initial3.GetComponent<Text>();
         //Load char list
-        charList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ *?!#$&".ToCharArray();
+        charList = charString.ToCharArray();
+        //Update display
+        UpdateCharDisplay();
     }
 
-    void Update()
+    private void UpdateCharDisplay()
     {
-        CurrentSelected();
+        initial1_text.text = charList[initial1CharNum].ToString();
+        initial2_text.text = charList[initial2CharNum].ToString();
+        initial3_text.text = charList[initial3CharNum].ToString();
     }
 
-    private void LoadCurrentInitials()
+    private void GetCurrentInitials()
     {
-        initial1text.text = gameManager.currentInitials[0].ToString();
-        initial2text.text = gameManager.currentInitials[1].ToString();
-        initial3text.text = gameManager.currentInitials[2].ToString();
+        initial1CharNum = gameManager.currentInitials[0];
+        initial2CharNum = gameManager.currentInitials[1];
+        initial3CharNum = gameManager.currentInitials[2];
     }
 
-    private void CurrentSelected()
+    public void AdjustInitial1(bool up)
     {
-        if (initial1.GetComponent<SpriteRenderer>().sprite == initial1.spriteState.highlightedSprite)
+        if (up)
         {
-            Debug.Log("Test");
+            initial1CharNum++;
+            //If last char, set to front
+            if (initial1CharNum >= charList.Length)
+                initial1CharNum = 0;
         }
+        else
+        {
+            initial1CharNum--;
+            //If first char, set to back
+            if (initial1CharNum < 0)
+                initial1CharNum = (charList.Length - 1);
+        }
+        UpdateCharDisplay();
     }
 
-    public void UpdateSelectedButton(int buttonNum)
+    public void AdjustInitial2(bool up)
     {
-        if (buttonNum == 1)
-            selectedButton = initial1;
-        if (buttonNum == 2)
-            selectedButton = initial2;
-        if (buttonNum == 3)
-            selectedButton = initial3;
-        buttonSelected = !buttonSelected;
+        if (up)
+        {
+            initial2CharNum++;
+            //If last char, set to front
+            if (initial2CharNum >= charList.Length)
+                initial2CharNum = 0;
+        }
+        else
+        {
+            initial2CharNum--;
+            //If first char, set to back
+            if (initial2CharNum < 0)
+                initial2CharNum = (charList.Length - 1);
+        }
+        UpdateCharDisplay();
     }
 
-    private void AdjustButtonChar()
+    public void AdjustInitial3(bool up)
     {
+        if (up)
+        {
+            initial3CharNum++;
+            //If last char, set to front
+            if (initial3CharNum >= charList.Length)
+                initial3CharNum = 0;
+        }
+        else
+        {
+            initial3CharNum--;
+            //If first char, set to back
+            if (initial3CharNum < 0)
+                initial3CharNum = (charList.Length - 1);
+        }
+        UpdateCharDisplay();
+    }
 
+    public void SetCurrentInitials()
+    {
+        gameManager.SetCurrentInitials(initial1CharNum, initial2CharNum, initial3CharNum);
     }
 }
