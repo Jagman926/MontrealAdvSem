@@ -16972,7 +16972,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 526293407}
         m_MethodName: HighscoreToEndLevelTransition
         m_Mode: 1
         m_Arguments:
