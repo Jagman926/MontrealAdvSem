@@ -14,3 +14,19 @@ MonoBehaviour:
   objectName: Level 3
   sceneName: Level_3
   levelBlockOrder: 01000000
+  lastLevelHighscores_Initials:
+  - 
+  - 
+  - 
+  lastLevelHighscores_values:
+  - 0
+  - 0
+  - 0
+  totalLevelHighscores_Initials:
+  - 
+  - 
+  - 
+  totalLevelHighscores_values:
+  - 0
+  - 0
+  - 0

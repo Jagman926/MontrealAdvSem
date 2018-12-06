@@ -16,6 +16,7 @@ namespace Managers
 
         //Managers
         GameManager gameManager;
+        ScenesManager scenesManager;
         PlayerManager playerManager;
         LevelManager levelManager;
 
@@ -53,6 +54,18 @@ namespace Managers
 
         [Header("Highscore UI")]
         [SerializeField]
+        private string initials;
+        [SerializeField]
+        private TextMeshProUGUI totalInit_1, totalInit_2, totalInit_3;
+        [SerializeField]
+        private TextMeshProUGUI lastInit_1, lastInit_2, lastInit_3;
+        [SerializeField]
+        private TextMeshProUGUI totalHigh_1, totalHigh_2, totalHigh_3;
+        [SerializeField]
+        private TextMeshProUGUI lastHigh_1, lastHigh_2, lastHigh_3;
+
+        [Header("Highscore Menu UI")]
+        [SerializeField]
         private GameObject highscoreMenu;
         [SerializeField]
         private Button continueButton;
@@ -65,6 +78,7 @@ namespace Managers
             levelManager = Managers.LevelManager.Instance;
             playerManager = Managers.PlayerManager.Instance;
             gameManager = Managers.GameManager.Instance;
+            scenesManager = Managers.ScenesManager.Instance;
         }
 
         private void Update()
@@ -207,14 +221,70 @@ namespace Managers
             retryCount.text = gameManager.levelRetries.ToString();
             levelTime.text = levelManager.levelTimer.ToString("F2");
             //If no retries than set total time to level time
-            if (gameManager.levelRetries > 0)
+            if (gameManager.levelRetries == 0)
             {
-                levelTotalTime.text = gameManager.levelTotalTimer.ToString("F2");
+                gameManager.levelTotalTimer = levelManager.levelTimer;
             }
-            else
+            levelTotalTime.text = gameManager.levelTotalTimer.ToString("F2");
+            //Update Highscores
+            if (levelManager.newTotalHighscore || levelManager.newLastHighscore)
             {
-                levelTotalTime.text = levelTime.text;
+                UpdateHighscores();
             }
+            //Set Highscore table
+            SetHighscoreUI();
+        }
+
+        private void UpdateHighscores()
+        {
+            if (levelManager.newTotalHighscore)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if(gameManager.levelTotalTimer < scenesManager.currentLevel.totalLevelHighscores_values[i] || scenesManager.currentLevel.totalLevelHighscores_values[i] == 0)
+                    {
+                        scenesManager.currentLevel.totalLevelHighscores_values.Insert(i, gameManager.levelTotalTimer);
+                        scenesManager.currentLevel.totalLevelHighscores_values.RemoveAt(scenesManager.currentLevel.totalLevelHighscores_values.Count - 1);
+                        scenesManager.currentLevel.totalLevelHighscores_Initials.Insert(i, gameManager.GetCurrentInitials());
+                        scenesManager.currentLevel.totalLevelHighscores_Initials.RemoveAt(scenesManager.currentLevel.totalLevelHighscores_Initials.Count - 1);
+                        break;
+                    }
+                }
+            }
+            if (levelManager.newLastHighscore)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if(levelManager.levelTimer < scenesManager.currentLevel.lastLevelHighscores_values[i] || scenesManager.currentLevel.lastLevelHighscores_values[i] == 0)
+                    {
+                        scenesManager.currentLevel.lastLevelHighscores_values.Insert(i, levelManager.levelTimer);
+                        scenesManager.currentLevel.lastLevelHighscores_values.RemoveAt(scenesManager.currentLevel.lastLevelHighscores_values.Count - 1);
+                        scenesManager.currentLevel.lastLevelHighscores_Initials.Insert(i, gameManager.GetCurrentInitials());
+                        scenesManager.currentLevel.lastLevelHighscores_Initials.RemoveAt(scenesManager.currentLevel.lastLevelHighscores_Initials.Count - 1);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void SetHighscoreUI()
+        {
+            //Total Initials
+            totalInit_1.text = scenesManager.currentLevel.totalLevelHighscores_Initials[0];
+            totalInit_2.text = scenesManager.currentLevel.totalLevelHighscores_Initials[1];
+            totalInit_3.text = scenesManager.currentLevel.totalLevelHighscores_Initials[2];
+            //Total Highscores
+            totalHigh_1.text = scenesManager.currentLevel.totalLevelHighscores_values[0].ToString("F2");
+            totalHigh_2.text = scenesManager.currentLevel.totalLevelHighscores_values[1].ToString("F2");
+            totalHigh_3.text = scenesManager.currentLevel.totalLevelHighscores_values[2].ToString("F2");
+            ///Last Initials
+            lastInit_1.text = scenesManager.currentLevel.lastLevelHighscores_Initials[0];
+            lastInit_2.text = scenesManager.currentLevel.lastLevelHighscores_Initials[1];
+            lastInit_3.text = scenesManager.currentLevel.lastLevelHighscores_Initials[2];
+            //Last Highscores
+            lastHigh_1.text = scenesManager.currentLevel.lastLevelHighscores_values[0].ToString("F2");
+            lastHigh_2.text = scenesManager.currentLevel.lastLevelHighscores_values[1].ToString("F2");
+            lastHigh_3.text = scenesManager.currentLevel.lastLevelHighscores_values[2].ToString("F2");
         }
 
         public void HighscoreMenu()

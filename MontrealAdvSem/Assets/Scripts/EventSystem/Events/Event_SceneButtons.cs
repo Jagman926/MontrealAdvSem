@@ -7,6 +7,7 @@ public class Event_SceneButtons : MonoBehaviour
 {
 	//Manager Instance
 	Managers.ScenesManager scenesManager;
+    Managers.GameManager gameManager;
 
     //Actions
     private Action<EventParam> aStartMenu;
@@ -26,6 +27,7 @@ public class Event_SceneButtons : MonoBehaviour
 	private void Start()
 	{
 		scenesManager = Managers.ScenesManager.Instance;
+        gameManager = Managers.GameManager.Instance;
 	}
 
     void OnEnable()
@@ -49,6 +51,7 @@ public class Event_SceneButtons : MonoBehaviour
     void StartMenu(EventParam eventParam)
     {
 		scenesManager.LoadStartMenu();
+        gameManager.levelCompleted = true;
     }
 
     void OptionsMenu(EventParam eventParam)

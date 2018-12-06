@@ -9,6 +9,7 @@ namespace Managers
         //Manager Instance
         GameManager gameManager;
         PlayerManager playerManager;
+        ScenesManager scenesManager;
 
         [Header("Level Settings")]
         public float levelTimer;
@@ -27,10 +28,15 @@ namespace Managers
         [SerializeField]
         private ParticleSystem endLevelParticles3;
 
+        //Highscore tracker
+        public bool newTotalHighscore;
+        public bool newLastHighscore;
+
         private void Awake()
         {
             //Manager Instance
             gameManager = Managers.GameManager.Instance;
+            scenesManager = Managers.ScenesManager.Instance;
             playerManager = Managers.PlayerManager.Instance;
         }
 
@@ -38,8 +44,11 @@ namespace Managers
         {
             //Set pause
             isPaused = false;
+            //Set highscore bool
+            newTotalHighscore = false;
+            newLastHighscore = false;
             //Set levelTimer
-            levelTimer = playerManager.spawnTimeSeconds;
+            levelTimer = 0;
             //Load Objective List
             LoadObjectivesList();
             //Start new level GameManager
@@ -117,7 +126,9 @@ namespace Managers
             //Pause
             isPaused = true;
             //Check for highscore
-            if (true)
+            CheckForHighscore();
+            //If new highscore
+            if (newTotalHighscore || newLastHighscore)
             {
                 //If new highscore, display highscore menu
                 Managers.EventManager.TriggerEvent("Highscore", eventParam);
@@ -126,6 +137,28 @@ namespace Managers
             {
                 //Display Menu
                 Managers.EventManager.TriggerEvent("EndLevel", eventParam);
+            }
+        }
+
+        private void CheckForHighscore()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                //If highscore is lower or there is no highscore
+                if (!newTotalHighscore)
+                {
+                    if (gameManager.levelTotalTimer < scenesManager.currentLevel.totalLevelHighscores_values[i] || scenesManager.currentLevel.totalLevelHighscores_values[i] == 0.0f)
+                    {
+                        newTotalHighscore = true;
+                    }
+                }
+                if (!newLastHighscore)
+                {
+                    if (levelTimer < scenesManager.currentLevel.lastLevelHighscores_values[i] || scenesManager.currentLevel.lastLevelHighscores_values[i] == 0.0f)
+                    {
+                        newLastHighscore = true;
+                    }
+                }
             }
         }
     }

@@ -27,7 +27,7 @@ public class InitialComboScript : MonoBehaviour
 
     //Character list
     private char[] charList;
-    private string charString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ*~$?!";
+    private string charString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     void Start()
     {
