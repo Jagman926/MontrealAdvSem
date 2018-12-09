@@ -131,10 +131,13 @@
      <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
      <Compile Include="Assets\Scripts\Managers\UiManager.cs" />
      <Compile Include="Assets\Scripts\Menu\InitialComboScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\MoveIntoView.cs" />
      <Compile Include="Assets\Scripts\Objective\MovableScript.cs" />
      <Compile Include="Assets\Scripts\Objective\ObjectiveScript.cs" />
      <Compile Include="Assets\Scripts\Objective\PlateScript.cs" />
+     <Compile Include="Assets\Scripts\Objective\PlateSelectScript.cs" />
      <Compile Include="Assets\Scripts\ParticleSystem\destroyParticleSystem.cs" />
+     <Compile Include="Assets\Scripts\Player\MenuPlayer.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\ZoneCheck.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
