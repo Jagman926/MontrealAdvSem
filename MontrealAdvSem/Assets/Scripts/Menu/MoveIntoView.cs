@@ -7,6 +7,6 @@ public class MoveIntoView : MonoBehaviour {
 
 	void Start () 
 	{
-		transform.DOLocalMoveY(8.80f,Random.Range(1.0f, 3.5f)).From();
+		transform.DOLocalMoveY(8.80f,Random.Range(1.0f, 3.0f)).From();
 	}
 }

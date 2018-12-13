@@ -13,6 +13,8 @@ public bool isDormant;
     public float mass;
     public int layerNumber;
     private Rigidbody2D rb;
+    private float yHeight;
+    private float xHeight;
 
 	[Header("Deteriorate Variables")]
 	public int hitsToBreak;
@@ -33,6 +35,8 @@ public bool isDormant;
         isDormant = false;
         //Get Rigidbody
         rb = gameObject.GetComponent<Rigidbody2D>();
+        yHeight = gameObject.GetComponent<BoxCollider2D>().size.y -.1f;
+        xHeight = gameObject.GetComponent<BoxCollider2D>().size.x;
 	}
 
     void Update()
@@ -67,7 +71,8 @@ public bool isDormant;
 
 	    private void OnCollisionEnter2D(Collision2D col)
     {
-        if(isDormant && col.transform.tag == "Player")
+        if(isDormant && col.transform.tag == "Player" && 
+        (col.transform.position.y > transform.position.y + yHeight && col.transform.position.x > transform.position.x - xHeight))
 		{
 			//Increment hit
 			currentHits++;
