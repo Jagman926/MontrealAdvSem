@@ -32,6 +32,8 @@ namespace Managers
             charList = charString.ToCharArray();
             //Init initials
             InitCurrentInitials(0, 0, 0);
+            //Set as level completed
+            levelCompleted = true;
         }
 
         private void Update()

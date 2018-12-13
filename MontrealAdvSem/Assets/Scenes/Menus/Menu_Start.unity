@@ -968,7 +968,6 @@ GameObject:
   m_Component:
   - component: {fileID: 139856566}
   - component: {fileID: 139856565}
-  - component: {fileID: 139856564}
   m_Layer: 0
   m_Name: _InputManager
   m_TagString: Untagged
@@ -976,18 +975,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &139856564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114292958014769282, guid: 239aacfd1e5dbfc45898d757e2fa2e99,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 139856563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6692c6eda1ba0f4eb7e86a2888a98b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &139856565
 MonoBehaviour:
   m_ObjectHideFlags: 0
