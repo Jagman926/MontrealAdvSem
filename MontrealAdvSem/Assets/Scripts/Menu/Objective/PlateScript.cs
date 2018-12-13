@@ -20,6 +20,11 @@ public class PlateScript : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
+    void Update()
+    {
+        CheckIfBlocksDestroyed();
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player" || col.tag == "Dormant")
@@ -45,6 +50,17 @@ public class PlateScript : MonoBehaviour
             {
                 spriteRenderer.color = offColor;
                 movableObject.GetComponent<MovableScript>().resetMove = true;
+            }
+        }
+    }
+
+    void CheckIfBlocksDestroyed()
+    {
+        for(int i = 0; i < colliderList.Count; i++)
+        {
+            if(colliderList[i] == null)
+            {
+                colliderList.Remove(colliderList[i]);
             }
         }
     }

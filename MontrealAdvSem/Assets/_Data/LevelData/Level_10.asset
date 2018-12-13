@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Level 10
   sceneName: Level_10
-  levelBlockOrder: 000000000000000000000000
+  levelBlockOrder: 0000000000000000
   lastLevelHighscores_Initials:
   - 
   - 
